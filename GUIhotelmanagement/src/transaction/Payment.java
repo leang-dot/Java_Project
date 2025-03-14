@@ -61,16 +61,6 @@ public class Payment extends Customer {
         return paymentMethod != null ? paymentMethod.equals(payment.paymentMethod) : payment.paymentMethod == null;
     }
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(amount);
-        result = (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (paymentMethod != null ? paymentMethod.hashCode() : 0);
-        return result;
-    }
-
     // Database connection details
     private static final String DB_URL = "jdbc:mysql://localhost:3306/your_database";
     private static final String DB_USER = "your_username";

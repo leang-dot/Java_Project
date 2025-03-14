@@ -129,20 +129,5 @@ public class Room {
         return Arrays.equals(roomFacilities, room.roomFacilities);
     }
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = roomNumber.hashCode();
-        result = 31 * result + roomType.hashCode();
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (isBooked ? 1 : 0);
-        result = 31 * result + floor;
-        result = 31 * result + viewType.hashCode();
-        result = 31 * result + (hasBalcony ? 1 : 0);
-        result = 31 * result + Arrays.hashCode(roomFacilities);
-        return result;
-    }
 }
 

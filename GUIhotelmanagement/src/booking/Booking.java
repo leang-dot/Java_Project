@@ -149,21 +149,5 @@ public class Booking extends Room {
         return customerCountry.equals(booking.customerCountry);
     }
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = bookingDate.hashCode();
-        result = 31 * result + checkIn.hashCode();
-        result = 31 * result + checkOut.hashCode();
-        temp = Double.doubleToLongBits(totalPrice);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + customerName.hashCode();
-        result = 31 * result + customerPhoneNumber.hashCode();
-        result = 31 * result + customerEmail.hashCode();
-        result = 31 * result + customerCity.hashCode();
-        result = 31 * result + customerCountry.hashCode();
-        return result;
-    }
 }
 
