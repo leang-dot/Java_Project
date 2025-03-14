@@ -1,7 +1,19 @@
 {
   "java.project.referencedLibraries": [
+<<<<<<< HEAD
     
     "c:\\mysql-connector-j-9.2.0.jar"
+=======
+    "e:\\aplication\\openjfx-23.0.2_windows-x64_bin-sdk\\javafx-sdk-23.0.2\\lib\\javafx.web.jar",
+    "e:\\aplication\\openjfx-23.0.2_windows-x64_bin-sdk\\javafx-sdk-23.0.2\\lib\\javafx.base.jar",
+    "e:\\aplication\\openjfx-23.0.2_windows-x64_bin-sdk\\javafx-sdk-23.0.2\\lib\\javafx.media.jar",
+    "e:\\aplication\\openjfx-23.0.2_windows-x64_bin-sdk\\javafx-sdk-23.0.2\\lib\\javafx-swt.jar",
+    "e:\\aplication\\openjfx-23.0.2_windows-x64_bin-sdk\\javafx-sdk-23.0.2\\lib\\javafx.swing.jar",
+    "e:\\aplication\\openjfx-23.0.2_windows-x64_bin-sdk\\javafx-sdk-23.0.2\\lib\\javafx.controls.jar",
+    "e:\\aplication\\openjfx-23.0.2_windows-x64_bin-sdk\\javafx-sdk-23.0.2\\lib\\javafx.graphics.jar",
+    "e:\\aplication\\openjfx-23.0.2_windows-x64_bin-sdk\\javafx-sdk-23.0.2\\lib\\javafx.fxml.jar",
+    "e:\\aplication\\mysql-connector-j-9.2.0\\mysql-connector-j-9.2.0\\mysql-connector-j-9.2.0.jar"
+>>>>>>> 447f8a90af76c3ed8a5abfb96eadfe5b1df9847d
   ],
   "java.project.sourcePaths": ["GUIhotelmanagement\\src"]
 }
