@@ -1,6 +1,14 @@
 package user;
 
-public class Employee extends User {
+import DataBase.DatabaseConnection;
+import interfaces.IAuthentication;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class Employee extends User implements IAuthentication {
     private static int employeeCount = 0;
     protected int employeeID;
     protected String employeeRole;
@@ -19,13 +27,49 @@ public class Employee extends User {
         this.employeeRole = employeeRole;
         this.salary = salary;
         this.address = address;
+        this.dateOfBirth = dateOfBirth;
         this.hireDate = hireDate;
         this.workStatus = workStatus;
         this.workSchedule = workSchedule;
         employeeCount++;
     }
 
-    // employee methods
+    @Override
+    public boolean login() {
+        Scanner sc = new Scanner(System.in);
+        boolean loggedIn = false;
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            System.out.println("Enter your email: ");
+            String email = sc.nextLine();
+            System.out.println("Enter your password: ");
+            String password = sc.nextLine();
+
+            // Check if the employee exists in the database
+            String sql = "SELECT u.id, u.email, u.password, e.employee_id, e.employee_role " +
+                        "FROM users u JOIN employees e ON u.id = e.id " +
+                        "WHERE u.email = ? AND u.password = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("Employee login successful!");
+                loggedIn = true;
+                this.employeeID = rs.getInt("employee_id");
+                this.employeeRole = rs.getString("employee_role");
+                this.email = rs.getString("email");
+                this.password = rs.getString("password");
+            } else {
+                System.out.println("Invalid email or password");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error during login: " + e.getMessage());
+        } finally {
+            sc.close();
+        }
+        return loggedIn;
+    }
 
     public static int getEmployeeCount() {
         return employeeCount;
@@ -62,6 +106,4 @@ public class Employee extends User {
     public void setWorkSchedule(String workSchedule) {
         this.workSchedule = workSchedule;
     }
-
 }
-
