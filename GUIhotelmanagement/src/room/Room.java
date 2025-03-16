@@ -14,6 +14,10 @@ public class Room {
 
     public Room(String roomNumber, String roomType, double price, int floor, String viewType, boolean hasBalcony,
             String[] roomFacilities) {
+        if (roomNumber == null || roomNumber.trim().isEmpty())
+            throw new IllegalArgumentException("Room number cannot be null or empty.");
+        if (price < 0)
+            throw new IllegalArgumentException("Price cannot be negative.");
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.price = price;
@@ -21,15 +25,17 @@ public class Room {
         this.floor = floor;
         this.viewType = viewType;
         this.hasBalcony = hasBalcony;
-        this.roomFacilities = roomFacilities;
+        this.roomFacilities = roomFacilities != null ? roomFacilities : new String[0];
     }
 
+    // Getters and Setters
     public String getRoomNumber() {
         return roomNumber;
     }
 
     public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
+        if (roomNumber != null && !roomNumber.trim().isEmpty())
+            this.roomNumber = roomNumber;
     }
 
     public String getRoomType() {
@@ -45,7 +51,8 @@ public class Room {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        if (price >= 0)
+            this.price = price;
     }
 
     public boolean isBooked() {
@@ -53,7 +60,7 @@ public class Room {
     }
 
     public void setBooked(boolean booked) {
-        isBooked = booked;
+        this.isBooked = booked;
     }
 
     public int getFloor() {
@@ -85,49 +92,39 @@ public class Room {
     }
 
     public void setRoomFacilities(String[] roomFacilities) {
-        this.roomFacilities = roomFacilities;
+        this.roomFacilities = roomFacilities != null ? roomFacilities : new String[0];
+    }
+
+    // Utility Methods
+    public void addFacility(String facility) {
+        if (facility != null && !facility.trim().isEmpty() && !Arrays.asList(roomFacilities).contains(facility)) {
+            String[] newFacilities = Arrays.copyOf(roomFacilities, roomFacilities.length + 1);
+            newFacilities[roomFacilities.length] = facility;
+            roomFacilities = newFacilities;
+        }
+    }
+
+    public void removeFacility(String facility) {
+        if (facility != null) {
+            int index = Arrays.asList(roomFacilities).indexOf(facility);
+            if (index >= 0) {
+                String[] newFacilities = new String[roomFacilities.length - 1];
+                System.arraycopy(roomFacilities, 0, newFacilities, 0, index);
+                System.arraycopy(roomFacilities, index + 1, newFacilities, index, roomFacilities.length - index - 1);
+                roomFacilities = newFacilities;
+            }
+        }
+    }
+
+    public void resetBookingStatus() {
+        isBooked = false;
+        System.out.println("Room " + roomNumber + " booking status reset.");
     }
 
     @Override
     public String toString() {
-        return "Room{" +
-                "roomNumber='" + roomNumber + '\'' +
-                ", roomType='" + roomType + '\'' +
-                ", price=" + price +
-                ", isBooked=" + isBooked +
-                ", floor=" + floor +
-                ", viewType='" + viewType + '\'' +
-                ", hasBalcony=" + hasBalcony +
-                ", roomFacilities=" + Arrays.toString(roomFacilities) +
-                '}';
+        return "Room " + roomNumber + " (" + roomType + ") - $" + price + " [Floor: " + floor + ", View: " + viewType +
+                ", Balcony: " + hasBalcony + ", Booked: " + isBooked + ", Facilities: "
+                + Arrays.toString(roomFacilities) + "]";
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        Room room = (Room) o;
-
-        if (Double.compare(room.price, price) != 0)
-            return false;
-        if (isBooked != room.isBooked)
-            return false;
-        if (floor != room.floor)
-            return false;
-        if (hasBalcony != room.hasBalcony)
-            return false;
-        if (!roomNumber.equals(room.roomNumber))
-            return false;
-        if (!roomType.equals(room.roomType))
-            return false;
-        if (!viewType.equals(room.viewType))
-            return false;
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        return Arrays.equals(roomFacilities, room.roomFacilities);
-    }
-
 }
-
