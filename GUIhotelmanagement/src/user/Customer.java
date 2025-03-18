@@ -13,64 +13,23 @@ import java.util.List;
 public class Customer extends User implements IAuthentication {
     private static int customerCount = 0;
     private int customerID;
-    private static List<Booking> Bookings = new ArrayList<>(); // Now explicitly private
+    private static List<Booking> Bookings = new ArrayList<>();
 
-    public Customer(int customerID, String firstName, String lastName, String phoneNumber, String email,
-            String password) {
+    public Customer(int customerID, String firstName, String lastName, String phoneNumber, String email, String password) {
         super(firstName, lastName, phoneNumber, email, password);
-        if (customerID < 0)
-            throw new IllegalArgumentException("Customer ID cannot be negative.");
+        if (customerID < 0) throw new IllegalArgumentException("Customer ID cannot be negative.");
         this.customerID = customerID;
         customerCount++;
     }
 
     // Getters and Setters
-    public static int getCustomerCount() {
-        return customerCount;
-    }
+    public static int getCustomerCount() { return customerCount; }
+    public int getCustomerID() { return customerID; }
+    public void setCustomerID(int customerID) { if (customerID >= 0) this.customerID = customerID; }
+    public List<Booking> getBookings() { return new ArrayList<>(Bookings); }
 
-    public int getCustomerID() {
-        return customerID;
-    }
+    
 
-    public void setCustomerID(int customerID) {
-        if (customerID >= 0)
-            this.customerID = customerID;
-    }
-
-    public List<Booking> getBookings() {
-        return new ArrayList<>(Bookings);
-    }
-
-    // IAuthentication Implementation
-    @Override
-    public boolean login() {
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            String sql = "SELECT u.id, u.email, u.password, c.customer_id " +
-                    "FROM users u JOIN customers c ON u.id = c.id " +
-                    "WHERE u.email = ? AND u.password = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                this.customerID = rs.getInt("customer_id");
-                this.email = rs.getString("email");
-                this.password = rs.getString("password");
-                System.out.println("Customer login successful!");
-                return true;
-            } else {
-                System.out.println("Invalid email or password");
-                return false;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error during login: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // Utility Methods for Bookings
     public void addBooking(Booking booking) {
         if (booking != null && !Bookings.contains(booking)) {
             Bookings.add(booking);
@@ -96,20 +55,29 @@ public class Customer extends User implements IAuthentication {
 
     public Booking findBookingById(String bookingId) {
         for (Booking booking : Bookings) {
-            if (booking.getBookingId().equals(bookingId))
-                return booking;
+            if (booking.getBookingId().equals(bookingId)) return booking;
         }
         return null;
     }
 
     public void viewBookings() {
-        if (Bookings.isEmpty())
-            System.out.println("No bookings for " + getFirstName() + ".");
+        if (Bookings.isEmpty()) System.out.println("No bookings for " + getFirstName() + ".");
         else {
             System.out.println("Bookings for " + getFirstName() + " " + getLastName() + ":");
-            for (Booking booking : Bookings)
-                System.out.println(booking);
+            for (Booking booking : Bookings) System.out.println(booking);
         }
+    }
+
+    @Override
+    public boolean checkIn(String bookingId, int roomNumber) {
+        System.out.println("Check-in operation not supported for customers.");
+        return false; // Or throw UnsupportedOperationException if stricter enforcement is needed
+    }
+
+    @Override
+    public boolean checkOut(String bookingId, int roomNumber) {
+        System.out.println("Check-out operation not supported for customers.");
+        return false; // Or throw UnsupportedOperationException
     }
 
     @Override
