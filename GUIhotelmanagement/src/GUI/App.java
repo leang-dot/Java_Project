@@ -1,22 +1,23 @@
 package GUI;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javax.swing.*;
 
-public class App extends Application {
-    @Override
-    public void start(Stage stage) {
-        Label label = new Label("Hello JavaFX!");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 300, 275);
-        stage.setTitle("Hello JavaFX");
-        stage.setScene(scene);
-        stage.show();
+public class App extends JFrame {
+    public App() {
+        setTitle("Hotel Management System");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        
+        // Create a JPanel and set it as the content pane
+        JPanel panel = new JPanel();
+        setContentPane(panel);
+        
+        setVisible(false);
     }
 
     public static void main(String[] args) {
-        launch(args);
+        
+        new App().setVisible(true);
     }
 }
