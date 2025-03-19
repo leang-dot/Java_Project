@@ -115,7 +115,7 @@ public class Hotel extends HotelEntity {
     }
 
     public void removeBooking(String bookingId, Customer customer) {
-        if (!isActive())
+        if (!isActive())                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
             throw new IllegalStateException("Hotel is inactive.");
         Booking booking = findBookingById(bookingId);
         if (booking != null && bookings.remove(booking)) {
