@@ -12,7 +12,7 @@ public class AppLauncher {
                 new LoginFormGUI().setVisible(true);
 
                 // check user test
-//                System.out.println(MyJDBC.checkUser("username1234"));
+               System.out.println(MyJDBC.checkUser("admin"));
 
                 // check register test
 //                System.out.println(MyJDBC.register("username1234", "password"));

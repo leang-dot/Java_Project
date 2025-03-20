@@ -18,5 +18,5 @@ public class CommonConstants {
 
     // place the password that you made here (might be different)
     public static final String DB_PASSWORD = "AVNS_UdeZEJwf8HVl-d5k4nW";
-    public static final String DB_USERS_TABLE_NAME = "USERS";
+    public static final String DB_USERS_TABLE_NAME = "admin";
 }
