@@ -29,33 +29,7 @@ public class Admin extends User implements IAuthentication {
     public void setAdminPassword(String adminPassword) { this.adminPassword = adminPassword; }
     public List<User> getUsers() { return new ArrayList<>(Users); }
 
-    // Method to save admin to the database
-    private void saveAdminToDatabase() {
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);
-            String sql = "INSERT INTO users (first_name, last_name, phone_number, email, password, user_type, admin_username, admin_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, getFirstName());
-            stmt.setString(2, getLastName());
-            stmt.setString(3, getPhoneNumber());
-            stmt.setString(4, getEmail());
-            stmt.setString(5, getPassword());
-            stmt.setString(6, "Admin");
-            stmt.setString(7, adminUserName);
-            stmt.setString(8, adminPassword);
-            stmt.executeUpdate();
-
-            conn.commit();
-            System.out.println("Admin saved to database successfully!");
-        } catch (SQLException e) {
-            System.out.println("Error saving admin to database: " + e.getMessage());
-            try (Connection conn = DatabaseConnection.getConnection()) {
-                conn.rollback();
-            } catch (SQLException rollbackEx) {
-                System.out.println("Error during rollback: " + rollbackEx.getMessage());
-            }
-        }
-    }
+    
 
     // IAuthentication Implementation
     

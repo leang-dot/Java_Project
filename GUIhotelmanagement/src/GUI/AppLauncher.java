@@ -1,5 +1,5 @@
 package GUI;
-import db.MyJDBC;
+import DataBase.DatabaseConnection;
 
 import javax.swing.*;
 
@@ -10,15 +10,6 @@ public class AppLauncher {
             public void run(){
                 // instantiate a LoginFormGUI obj and make it visible
                 new LoginFormGUI().setVisible(true);
-
-                // check user test
-               System.out.println(MyJDBC.checkUser("admin"));
-
-                // check register test
-//                System.out.println(MyJDBC.register("username1234", "password"));
-
-                // check validate login test
-//                System.out.println(MyJDBC.validateLogin("username1234", "password"));
             }
         });
     }

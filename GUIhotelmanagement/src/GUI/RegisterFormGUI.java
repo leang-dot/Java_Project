@@ -1,12 +1,10 @@
 package GUI;
 
 import constants.CommonConstants;
-import db.MyJDBC;
+import DataBase.DatabaseConnection;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -91,45 +89,7 @@ public class RegisterFormGUI extends Form{
         registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         registerButton.setBackground(CommonConstants.TEXT_COLOR);
         registerButton.setBounds(125, 520, 250, 50);
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // get username
-                String username = usernameField.getText();
-
-                // get password
-                String password = new String(passwordField.getPassword());
-
-                // get repassword
-                String rePassword = new String(rePasswordField.getPassword());
-
-                // validate user input
-                if(validateUserInput(username, password, rePassword)){
-                    // register user to the database
-                    if(MyJDBC.register(username, password)){
-                        // dispose of this gui
-                        RegisterFormGUI.this.dispose();
-
-                        // take user back to the login gui
-                        LoginFormGUI loginFormGUI = new LoginFormGUI();
-                        loginFormGUI.setVisible(true);
-
-                        // create a result dialog
-                        JOptionPane.showMessageDialog(loginFormGUI,
-                                "Registered Account Successfully!");
-                    }else{
-                        // register failed (likely due to the user already existing in the database)
-                        JOptionPane.showMessageDialog(RegisterFormGUI.this,
-                                "Error: Username already taken");
-                    }
-                }else{
-                    // invalid user input
-                    JOptionPane.showMessageDialog(RegisterFormGUI.this,
-                            "Error: Username must be at least 6 characters \n" +
-                                    "and/or Passwords must match");
-                }
-            }
-        });
+        
         add(registerButton);
 
         // create register label (used to load the register GUI)
@@ -154,18 +114,5 @@ public class RegisterFormGUI extends Form{
         add(loginLabel);
     }
 
-    private boolean validateUserInput(String username, String password, String rePassword){
-        // all fields must have a value
-        if(username.length() == 0 || password.length() == 0 || rePassword.length() == 0) return false;
-
-        // username has to be at least 6 characters long
-        if(username.length() < 6) return false;
-
-        // password and repassword must be the same
-        if(!password.equals(rePassword)) return false;
-
-        // passes validation
-        return true;
-    }
-
+    
 }
