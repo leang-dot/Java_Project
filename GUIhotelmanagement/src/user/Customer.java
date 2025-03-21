@@ -36,14 +36,14 @@ public class Customer extends User implements IAuthentication {
         return new ArrayList<>(Bookings);
     }
 
-    private void addBooking(Booking booking) {
+    public void addBooking(Booking booking) {
         if (booking != null && !Bookings.contains(booking)) {
             Bookings.add(booking);
             System.out.println("Booking " + booking.getBookingId() + " added for " + getFirstName());
         }
     }
 
-    private void removeBooking(Booking booking) {
+    public void removeBooking(Booking booking) {
         if (booking != null && Bookings.remove(booking)) {
             System.out.println("Booking " + booking.getBookingId() + " removed for " + getFirstName());
         }
