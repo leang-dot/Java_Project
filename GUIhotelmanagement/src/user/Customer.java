@@ -11,20 +11,30 @@ public class Customer extends User implements IAuthentication {
     private int customerID;
     private static List<Booking> Bookings = new ArrayList<>();
 
-    public Customer(int customerID, String firstName, String lastName, String phoneNumber, String email, String password) {
+    public Customer(int customerID, String firstName, String lastName, String phoneNumber, String email,
+            String password) {
         super(firstName, lastName, phoneNumber, email, password);
-        if (customerID < 0) throw new IllegalArgumentException("Customer ID cannot be negative.");
         this.customerID = customerID;
         customerCount++;
     }
-
-    // Getters and Setters
-    public static int getCustomerCount() { return customerCount; }
-    public int getCustomerID() { return customerID; }
-    public void setCustomerID(int customerID) { if (customerID >= 0) this.customerID = customerID; }
-    public List<Booking> getBookings() { return new ArrayList<>(Bookings); }
-
     
+    // Getters and Setters
+    public static int getCustomerCount() {
+        return customerCount;
+    }
+    
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        if (customerID >= 0)
+        this.customerID = customerID;
+    }
+
+    public List<Booking> getBookings() {
+        return new ArrayList<>(Bookings);
+    }
 
     public void addBooking(Booking booking) {
         if (booking != null && !Bookings.contains(booking)) {
@@ -51,19 +61,22 @@ public class Customer extends User implements IAuthentication {
 
     public Booking findBookingById(String bookingId) {
         for (Booking booking : Bookings) {
-            if (booking.getBookingId().equals(bookingId)) return booking;
+            if (booking.getBookingId().equals(bookingId))
+            return booking;
         }
         return null;
     }
 
     public void viewBookings() {
-        if (Bookings.isEmpty()) System.out.println("No bookings for " + getFirstName() + ".");
+        if (Bookings.isEmpty())
+            System.out.println("No bookings for " + getFirstName() + ".");
         else {
             System.out.println("Bookings for " + getFirstName() + " " + getLastName() + ":");
-            for (Booking booking : Bookings) System.out.println(booking);
+            for (Booking booking : Bookings)
+            System.out.println(booking);
         }
     }
-
+    
     @Override
     public boolean checkIn(String bookingId, int roomNumber) {
         System.out.println("Check-in operation not supported for customers.");
@@ -81,3 +94,5 @@ public class Customer extends User implements IAuthentication {
         return "Customer " + customerID + ": " + getFirstName() + " " + getLastName() + " (" + getEmail() + ")";
     }
 }
+// if (customerID < 0)
+//     throw new IllegalArgumentException("Customer ID cannot be negative.");

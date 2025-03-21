@@ -8,17 +8,18 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class RegisterFormGUI extends Form{
+public class RegisterFormGUI extends Form {
     public RegisterFormGUI() {
         super("Register");
         addGuiComponents();
     }
 
-    private void addGuiComponents(){
+    private void addGuiComponents() {
         // create register label
         JLabel registerLabel = new JLabel("Register");
 
-        // configure component's x,y position and width/height values relative to the GUI
+        // configure component's x,y position and width/height values relative to the
+        // GUI
         registerLabel.setBounds(0, 25, 520, 100);
 
         // change the font color
@@ -89,7 +90,7 @@ public class RegisterFormGUI extends Form{
         registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         registerButton.setBackground(CommonConstants.TEXT_COLOR);
         registerButton.setBounds(125, 520, 250, 50);
-        
+
         add(registerButton);
 
         // create register label (used to load the register GUI)
@@ -114,5 +115,4 @@ public class RegisterFormGUI extends Form{
         add(loginLabel);
     }
 
-    
 }

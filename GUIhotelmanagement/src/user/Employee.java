@@ -21,8 +21,10 @@ public class Employee extends User implements IAuthentication {
             String hireDate, String workStatus, String workSchedule, String firstName, String lastName,
             String phoneNumber, String email, String password) {
         super(firstName, lastName, phoneNumber, email, password);
-        if (employeeID < 0) throw new IllegalArgumentException("Employee ID cannot be negative.");
-        if (salary != null && salary < 0) throw new IllegalArgumentException("Salary cannot be negative.");
+        if (employeeID < 0)
+            throw new IllegalArgumentException("Employee ID cannot be negative.");
+        if (salary != null && salary < 0)
+            throw new IllegalArgumentException("Salary cannot be negative.");
         this.employeeID = employeeID;
         this.employeeRole = employeeRole;
         this.salary = salary;
@@ -34,24 +36,71 @@ public class Employee extends User implements IAuthentication {
     }
 
     // Getters and Setters
-    public int getEmployeeID() { return employeeID; }
-    public void setEmployeeID(int employeeID) { if (employeeID >= 0) this.employeeID = employeeID; }
-    public String getEmployeeRole() { return employeeRole; }
-    public void setEmployeeRole(String employeeRole) { this.employeeRole = employeeRole; }
-    public Double getSalary() { return salary; }
-    public void setSalary(Double salary) { if (salary == null || salary >= 0) this.salary = salary; }
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-    public String getDateOfBirth() { return dateOfBirth; }
-    public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
-    public String getHireDate() { return hireDate; }
-    public void setHireDate(String hireDate) { this.hireDate = hireDate; }
-    public String getWorkStatus() { return workStatus; }
-    public void setWorkStatus(String workStatus) { this.workStatus = workStatus; }
-    public String getWorkSchedule() { return workSchedule; }
-    public void setWorkSchedule(String workSchedule) { this.workSchedule = workSchedule; }
+    public int getEmployeeID() {
+        return employeeID;
+    }
 
-    
+    public void setEmployeeID(int employeeID) {
+        if (employeeID >= 0)
+            this.employeeID = employeeID;
+    }
+
+    public String getEmployeeRole() {
+        return employeeRole;
+    }
+
+    public void setEmployeeRole(String employeeRole) {
+        this.employeeRole = employeeRole;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        if (salary == null || salary >= 0)
+            this.salary = salary;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(String hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public String getWorkStatus() {
+        return workStatus;
+    }
+
+    public void setWorkStatus(String workStatus) {
+        this.workStatus = workStatus;
+    }
+
+    public String getWorkSchedule() {
+        return workSchedule;
+    }
+
+    public void setWorkSchedule(String workSchedule) {
+        this.workSchedule = workSchedule;
+    }
 
     @Override
     public boolean checkIn(String bookingId, int roomNumber) {
@@ -113,7 +162,8 @@ public class Employee extends User implements IAuthentication {
                     return true;
                 }
             } else {
-                System.out.println("Booking " + bookingId + " not found or not checked in for room " + roomNumber + ".");
+                System.out
+                        .println("Booking " + bookingId + " not found or not checked in for room " + roomNumber + ".");
                 return false;
             }
         } catch (SQLException e) {
@@ -124,14 +174,18 @@ public class Employee extends User implements IAuthentication {
     }
 
     public void updateProfile(String address, String phoneNumber, String workSchedule) {
-        if (address != null) this.address = address;
-        if (phoneNumber != null) this.phoneNumber = phoneNumber;
-        if (workSchedule != null) this.workSchedule = workSchedule;
+        if (address != null)
+            this.address = address;
+        if (phoneNumber != null)
+            this.phoneNumber = phoneNumber;
+        if (workSchedule != null)
+            this.workSchedule = workSchedule;
         System.out.println("Profile updated for " + getFirstName());
     }
 
     @Override
     public String toString() {
-        return "Employee " + employeeID + ": " + getFirstName() + " " + getLastName() + " (" + employeeRole + ") - $" + salary;
+        return "Employee " + employeeID + ": " + getFirstName() + " " + getLastName() + " (" + employeeRole + ") - $"
+                + salary;
     }
 }

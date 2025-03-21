@@ -91,7 +91,8 @@ public class Main {
                     System.out.print("Enter password: ");
                     String empPassword = scanner.nextLine();
 
-                    Employee employee = new Employee(empId, role, salary, address, dob, hireDate, workStatus, workSchedule,
+                    Employee employee = new Employee(empId, role, salary, address, dob, hireDate, workStatus,
+                            workSchedule,
                             empFirstName, empLastName, empPhone, empEmail, empPassword);
                     admin.addEmployee(employee);
                     System.out.println("Added employee: " + employee);
@@ -111,7 +112,8 @@ public class Main {
                     System.out.print("Enter password: ");
                     String custPassword = scanner.nextLine();
 
-                    Customer customer = new Customer(custId, custFirstName, custLastName, custPhone, custEmail, custPassword);
+                    Customer customer = new Customer(custId, custFirstName, custLastName, custPhone, custEmail,
+                            custPassword);
                     admin.addCustomer(customer);
                     System.out.println("Added customer: " + customer);
                     break;
@@ -155,24 +157,24 @@ public class Main {
                     break;
 
                 // case 6: // Add Booking for Customer
-                //     System.out.print("Enter customer ID: ");
-                //     int custIdForBooking = Integer.parseInt(scanner.nextLine());
-                //     System.out.print("Enter booking ID: ");
-                //     String bookingId = scanner.nextLine();
-                //     System.out.print("Enter room number: ");
-                //     int roomNumber = Integer.parseInt(scanner.nextLine());
-                //     System.out.print("Enter initial status (e.g., reserved): ");
-                //     String status = scanner.nextLine();
+                // System.out.print("Enter customer ID: ");
+                // int custIdForBooking = Integer.parseInt(scanner.nextLine());
+                // System.out.print("Enter booking ID: ");
+                // String bookingId = scanner.nextLine();
+                // System.out.print("Enter room number: ");
+                // int roomNumber = Integer.parseInt(scanner.nextLine());
+                // System.out.print("Enter initial status (e.g., reserved): ");
+                // String status = scanner.nextLine();
 
-                //     User user = admin.findUserById(custIdForBooking, "Customer");
-                //     if (user instanceof Customer) {
-                //         Booking booking = new Booking();
-                //         ((Customer) user).addBooking(booking);
-                //         System.out.println("Added booking: " + booking);
-                //     } else {
-                //         System.out.println("Customer not found!");
-                //     }
-                //     break;
+                // User user = admin.findUserById(custIdForBooking, "Customer");
+                // if (user instanceof Customer) {
+                // Booking booking = new Booking();
+                // ((Customer) user).addBooking(booking);
+                // System.out.println("Added booking: " + booking);
+                // } else {
+                // System.out.println("Customer not found!");
+                // }
+                // break;
 
                 case 7: // Check-In
                     System.out.print("Enter booking ID: ");
