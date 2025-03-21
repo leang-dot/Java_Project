@@ -24,7 +24,8 @@ public class Form extends JFrame {
         setLocationRelativeTo(null);
 
         // prevent GUI from changing size
-        setResizable(false);
+        setResizable(true);
+
 
         // change the background color of the GUI
         getContentPane().setBackground(CommonConstants.PRIMARY_COLOR);
