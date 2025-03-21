@@ -8,14 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Employee extends User implements IAuthentication {
-    protected int employeeID;
-    protected String employeeRole;
-    protected Double salary;
-    protected String address;
-    protected String dateOfBirth;
-    protected String hireDate;
-    protected String workStatus;
-    protected String workSchedule;
+    private int employeeID;
+    private String employeeRole;
+    private Double salary;
+    private String address;
+    private String dateOfBirth;
+    private String hireDate;
+    private String workStatus;
+    private String workSchedule;
 
     public Employee(int employeeID, String employeeRole, Double salary, String address, String dateOfBirth,
             String hireDate, String workStatus, String workSchedule, String firstName, String lastName,
