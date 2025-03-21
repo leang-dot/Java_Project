@@ -136,7 +136,7 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Add Employee
-    public void addEmployee(Employee employee) {
+    private void addEmployee(Employee employee) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             String sql = "INSERT INTO users (first_name, last_name, phone_number, email, password, user_type, employee_id, employee_role, salary, address, date_of_birth, hire_date, work_status, work_schedule) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -166,7 +166,7 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Add Customer
-    public void addCustomer(Customer customer) {
+    private void addCustomer(Customer customer) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             String sql = "INSERT INTO users (first_name, last_name, phone_number, email, password, user_type, customer_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -189,7 +189,7 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Remove Employee
-    public void removeEmployee(int employeeId) {
+    private void removeEmployee(int employeeId) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             User user = findUserById(employeeId, "Employee");
@@ -225,7 +225,7 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Remove Customer
-    public void removeCustomer(int customerId) {
+    private void removeCustomer(int customerId) {
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
@@ -273,6 +273,9 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Update Employee
+
+
+
     public void updateEmployee(int employeeId, String newFirstName, String newLastName, String newPhoneNumber,
             String newEmail) {
         try (Connection conn = DatabaseConnection.getConnection()) {
@@ -313,8 +316,12 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Update Customer
+
+ 
+
     public void updateCustomer(int customerId, String newFirstName, String newLastName, String newPhoneNumber,
             String newEmail) {
+
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             User user = findUserById(customerId, "Customer");
@@ -353,7 +360,7 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Helper method to find user by ID and type (made public for Main class access)
-    public User findUserById(int id, String userType) {
+    private User findUserById(int id, String userType) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             String sql = "SELECT * FROM users WHERE ";
             if ("Employee".equals(userType)) {
@@ -404,7 +411,7 @@ public class Admin extends User implements IAuthentication {
     }
 
     // View All Users
-    public void viewAllUsers() {
+    private void viewAllUsers() {
         try (Connection conn = DatabaseConnection.getConnection()) {
             String sql = "SELECT * FROM users";
             PreparedStatement stmt = conn.prepareStatement(sql);

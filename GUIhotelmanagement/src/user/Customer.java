@@ -36,20 +36,20 @@ public class Customer extends User implements IAuthentication {
         return new ArrayList<>(Bookings);
     }
 
-    public void addBooking(Booking booking) {
+    private void addBooking(Booking booking) {
         if (booking != null && !Bookings.contains(booking)) {
             Bookings.add(booking);
             System.out.println("Booking " + booking.getBookingId() + " added for " + getFirstName());
         }
     }
 
-    public void removeBooking(Booking booking) {
+    private void removeBooking(Booking booking) {
         if (booking != null && Bookings.remove(booking)) {
             System.out.println("Booking " + booking.getBookingId() + " removed for " + getFirstName());
         }
     }
 
-    public void cancelBooking(String bookingId) {
+    private void cancelBooking(String bookingId) {
         Booking booking = findBookingById(bookingId);
         if (booking != null && Bookings.remove(booking)) {
             booking.cancelBooking();
@@ -59,7 +59,7 @@ public class Customer extends User implements IAuthentication {
         }
     }
 
-    public Booking findBookingById(String bookingId) {
+    private Booking findBookingById(String bookingId) {
         for (Booking booking : Bookings) {
             if (booking.getBookingId().equals(bookingId))
             return booking;
@@ -67,15 +67,8 @@ public class Customer extends User implements IAuthentication {
         return null;
     }
 
-    public void viewBookings() {
-        if (Bookings.isEmpty())
-            System.out.println("No bookings for " + getFirstName() + ".");
-        else {
-            System.out.println("Bookings for " + getFirstName() + " " + getLastName() + ":");
-            for (Booking booking : Bookings)
-            System.out.println(booking);
-        }
-    }
+
+   
     
     @Override
     public boolean checkIn(String bookingId, int roomNumber) {
@@ -94,5 +87,9 @@ public class Customer extends User implements IAuthentication {
         return "Customer " + customerID + ": " + getFirstName() + " " + getLastName() + " (" + getEmail() + ")";
     }
 }
+
+
+
+
 // if (customerID < 0)
 //     throw new IllegalArgumentException("Customer ID cannot be negative.");
