@@ -95,4 +95,8 @@ public class LoginFormGUI extends Form{
         registerLabel.setBounds(125, 600, 250, 30);
         add(registerLabel);
     }
+
+    // work with database with folder "DataBase" and class "DatabaseConnection"
+    
+    
 }
