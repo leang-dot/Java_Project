@@ -101,7 +101,7 @@ public class Hotel extends HotelEntity {
                 Room room = findRoomByNumber(booking.getRoomNumber());
             if (room != null && !room.isBooked()) {
                 bookings.add(booking);
-                customer.addBooking(booking); // Use Customer instance method instead of direct access
+                customer.addBooking(booking); 
                 room.setBooked(true);
                 System.out.println(
                         "Booking " + booking.getBookingId() + " added to " + name + " for " + customer.getFirstName());
