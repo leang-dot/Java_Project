@@ -26,20 +26,20 @@ public class Customer extends User implements IAuthentication {
 
     
 
-    public void addBooking(Booking booking) {
+    private void addBooking(Booking booking) {
         if (booking != null && !Bookings.contains(booking)) {
             Bookings.add(booking);
             System.out.println("Booking " + booking.getBookingId() + " added for " + getFirstName());
         }
     }
 
-    public void removeBooking(Booking booking) {
+    private void removeBooking(Booking booking) {
         if (booking != null && Bookings.remove(booking)) {
             System.out.println("Booking " + booking.getBookingId() + " removed for " + getFirstName());
         }
     }
 
-    public void cancelBooking(String bookingId) {
+    private void cancelBooking(String bookingId) {
         Booking booking = findBookingById(bookingId);
         if (booking != null && Bookings.remove(booking)) {
             booking.cancelBooking();
@@ -49,14 +49,14 @@ public class Customer extends User implements IAuthentication {
         }
     }
 
-    public Booking findBookingById(String bookingId) {
+    private Booking findBookingById(String bookingId) {
         for (Booking booking : Bookings) {
             if (booking.getBookingId().equals(bookingId)) return booking;
         }
         return null;
     }
 
-    public void viewBookings() {
+    private void viewBookings() {
         if (Bookings.isEmpty()) System.out.println("No bookings for " + getFirstName() + ".");
         else {
             System.out.println("Bookings for " + getFirstName() + " " + getLastName() + ":");
