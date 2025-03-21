@@ -3,7 +3,7 @@ package hotelApp;
 import user.Admin;
 import user.Employee;
 import user.Customer;
-// import booking.Booking;
+import booking.Booking;
 import java.util.Scanner;
 
 public class Main {

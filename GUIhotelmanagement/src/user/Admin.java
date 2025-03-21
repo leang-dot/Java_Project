@@ -274,8 +274,6 @@ public class Admin extends User implements IAuthentication {
 
     // Update Employee
 
-
-
     public void updateEmployee(int employeeId, String newFirstName, String newLastName, String newPhoneNumber,
             String newEmail) {
         try (Connection conn = DatabaseConnection.getConnection()) {
@@ -316,8 +314,6 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Update Customer
-
- 
 
     public void updateCustomer(int customerId, String newFirstName, String newLastName, String newPhoneNumber,
             String newEmail) {
@@ -448,10 +444,5 @@ public class Admin extends User implements IAuthentication {
         } catch (SQLException e) {
             System.out.println("Error viewing users: " + e.getMessage());
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Admin: " + getFirstName() + " " + getLastName() + " (" + adminUserName + ")";
     }
 }
