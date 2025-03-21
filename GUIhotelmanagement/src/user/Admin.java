@@ -15,24 +15,38 @@ public class Admin extends User implements IAuthentication {
     private String adminPassword;
     static List<User> Users = new ArrayList<>();
 
-    public Admin(String adminUserName, String adminPassword, String firstName, String lastName, String phoneNumber, String email, String password) {
+    public Admin(String adminUserName, String adminPassword, String firstName, String lastName, String phoneNumber,
+            String email, String password) {
         super(firstName, lastName, phoneNumber, email, password); // Pass userType as "Admin"
-        if (adminUserName == null || adminUserName.trim().isEmpty()) throw new IllegalArgumentException("Admin username cannot be null or empty.");
+        if (adminUserName == null || adminUserName.trim().isEmpty())
+            throw new IllegalArgumentException("Admin username cannot be null or empty.");
         this.adminUserName = adminUserName;
         this.adminPassword = adminPassword;
     }
 
     // Getters and Setters
-    public String getAdminUserName() { return adminUserName; }
-    public void setAdminUserName(String adminUserName) { if (adminUserName != null && !adminUserName.trim().isEmpty()) this.adminUserName = adminUserName; }
-    public String getAdminPassword() { return adminPassword; }
-    public void setAdminPassword(String adminPassword) { this.adminPassword = adminPassword; }
-    public List<User> getUsers() { return new ArrayList<>(Users); }
+    public String getAdminUserName() {
+        return adminUserName;
+    }
 
-    
+    public void setAdminUserName(String adminUserName) {
+        if (adminUserName != null && !adminUserName.trim().isEmpty())
+            this.adminUserName = adminUserName;
+    }
+
+    public String getAdminPassword() {
+        return adminPassword;
+    }
+
+    public void setAdminPassword(String adminPassword) {
+        this.adminPassword = adminPassword;
+    }
+
+    public List<User> getUsers() {
+        return new ArrayList<>(Users);
+    }
 
     // IAuthentication Implementation
-    
 
     @Override
     public boolean checkIn(String bookingId, int roomNumber) {
@@ -68,7 +82,8 @@ public class Admin extends User implements IAuthentication {
                     System.out.println("Check-in successful for booking " + bookingId + " in room " + roomNumber);
                     return true;
                 } else {
-                    System.out.println("Booking " + bookingId + " not found or not reserved for room " + roomNumber + ".");
+                    System.out.println(
+                            "Booking " + bookingId + " not found or not reserved for room " + roomNumber + ".");
                 }
             } else {
                 System.out.println("Room " + roomNumber + " is not available.");
@@ -109,7 +124,8 @@ public class Admin extends User implements IAuthentication {
                 System.out.println("Check-out successful for booking " + bookingId + " from room " + roomNumber);
                 return true;
             } else {
-                System.out.println("Booking " + bookingId + " not found or not checked in for room " + roomNumber + ".");
+                System.out
+                        .println("Booking " + bookingId + " not found or not checked in for room " + roomNumber + ".");
             }
             conn.rollback();
             return false;
@@ -197,7 +213,8 @@ public class Admin extends User implements IAuthentication {
         } catch (SQLException e) {
             System.out.println("Error removing employee: " + e.getMessage());
             if (e.getMessage().contains("foreign key constraint")) {
-                System.out.println("Employee " + employeeId + " has existing bookings or other dependencies and cannot be removed.");
+                System.out.println("Employee " + employeeId
+                        + " has existing bookings or other dependencies and cannot be removed.");
             }
             try (Connection conn = DatabaseConnection.getConnection()) {
                 conn.rollback();
@@ -256,7 +273,11 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Update Employee
-    private void updateEmployee(int employeeId, String newFirstName, String newLastName, String newPhoneNumber, String newEmail) {
+
+
+
+    public void updateEmployee(int employeeId, String newFirstName, String newLastName, String newPhoneNumber,
+            String newEmail) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             User user = findUserById(employeeId, "Employee");
@@ -295,7 +316,12 @@ public class Admin extends User implements IAuthentication {
     }
 
     // Update Customer
-    private void updateCustomer(int customerId, String newFirstName, String newLastName, String newPhoneNumber, String newEmail) {
+
+ 
+
+    public void updateCustomer(int customerId, String newFirstName, String newLastName, String newPhoneNumber,
+            String newEmail) {
+
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             User user = findUserById(customerId, "Customer");
@@ -352,29 +378,27 @@ public class Admin extends User implements IAuthentication {
                 User user;
                 if ("Employee".equals(rs.getString("user_type"))) {
                     user = new Employee(
-                        rs.getInt("employee_id"),
-                        rs.getString("employee_role"),
-                        rs.getDouble("salary"),
-                        rs.getString("address"),
-                        rs.getString("date_of_birth"),
-                        rs.getString("hire_date"),
-                        rs.getString("work_status"),
-                        rs.getString("work_schedule"),
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("phone_number"),
-                        rs.getString("email"),
-                        rs.getString("password")
-                    );
+                            rs.getInt("employee_id"),
+                            rs.getString("employee_role"),
+                            rs.getDouble("salary"),
+                            rs.getString("address"),
+                            rs.getString("date_of_birth"),
+                            rs.getString("hire_date"),
+                            rs.getString("work_status"),
+                            rs.getString("work_schedule"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getString("phone_number"),
+                            rs.getString("email"),
+                            rs.getString("password"));
                 } else if ("Customer".equals(rs.getString("user_type"))) {
                     user = new Customer(
-                        rs.getInt("customer_id"),
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("phone_number"),
-                        rs.getString("email"),
-                        rs.getString("password")
-                    );
+                            rs.getInt("customer_id"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getString("phone_number"),
+                            rs.getString("email"),
+                            rs.getString("password"));
                 } else {
                     return null; // Should not happen with proper user_type check
                 }
@@ -393,14 +417,15 @@ public class Admin extends User implements IAuthentication {
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
-            if (!rs.isBeforeFirst()) System.out.println("No users found.");
+            if (!rs.isBeforeFirst())
+                System.out.println("No users found.");
             else {
                 System.out.println("========All Users=======");
                 while (rs.next()) {
                     String userType = rs.getString("user_type");
                     System.out.println("Type: " + userType);
-                    System.out.println("ID: " + (rs.getObject("employee_id") != null ? rs.getInt("employee_id") : 
-                                               rs.getObject("customer_id") != null ? rs.getInt("customer_id") : "N/A"));
+                    System.out.println("ID: " + (rs.getObject("employee_id") != null ? rs.getInt("employee_id")
+                            : rs.getObject("customer_id") != null ? rs.getInt("customer_id") : "N/A"));
                     System.out.println("Name: " + rs.getString("first_name") + " " + rs.getString("last_name"));
                     System.out.println("Phone: " + rs.getString("phone_number"));
                     System.out.println("Email: " + rs.getString("email"));

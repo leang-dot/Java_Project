@@ -16,8 +16,6 @@ public class Hotel extends HotelEntity {
 
     public Hotel(String id, String status, String name, String location) {
         super(id, status);
-        if (name == null || name.trim().isEmpty())
-            throw new IllegalArgumentException("Hotel name cannot be null or empty.");
         this.name = name;
         this.location = location;
         this.rooms = new ArrayList<>();
@@ -29,16 +27,16 @@ public class Hotel extends HotelEntity {
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         if (name != null && !name.trim().isEmpty())
-            this.name = name;
+        this.name = name;
     }
-
+    
     public String getLocation() {
         return location;
     }
-
+    
     public void setLocation(String location) {
         this.location = location;
     }
@@ -46,31 +44,31 @@ public class Hotel extends HotelEntity {
     public List<Room> getRooms() {
         return new ArrayList<>(rooms);
     }
-
+    
     public List<Booking> getBookings() {
         return new ArrayList<>(bookings);
     }
-
+    
     public List<Employee> getEmployees() {
         return new ArrayList<>(employees);
     }
-
+    
     // Room Management
     public void addRoom(Room room) {
         if (!isActive())
             throw new IllegalStateException("Hotel is inactive.");
-        if (room != null && findRoomByNumber(room.getRoomNumber()) == null) {
-            rooms.add(room);
-            System.out.println("Room " + room.getRoomNumber() + " added to " + name);
-        } else {
-            System.out.println(
+            if (room != null && findRoomByNumber(room.getRoomNumber()) == null) {
+                rooms.add(room);
+                System.out.println("Room " + room.getRoomNumber() + " added to " + name);
+            } else {
+                System.out.println(
                     "Room " + (room != null ? room.getRoomNumber() : "null") + " already exists or is invalid.");
         }
     }
-
+    
     public void removeRoom(String roomNumber) {
         if (!isActive())
-            throw new IllegalStateException("Hotel is inactive.");
+        throw new IllegalStateException("Hotel is inactive.");
         Room room = findRoomByNumber(roomNumber);
         if (room != null && rooms.remove(room)) {
             System.out.println("Room " + roomNumber + " removed from " + name);
@@ -95,13 +93,13 @@ public class Hotel extends HotelEntity {
         }
         return available;
     }
-
+    
     // Booking Management
     public void addBooking(Booking booking, Customer customer) {
         if (!isActive())
             throw new IllegalStateException("Hotel is inactive.");
-        if (booking != null && !bookings.contains(booking) && customer != null) {
-            Room room = findRoomByNumber(booking.getRoomNumber());
+            if (booking != null && !bookings.contains(booking) && customer != null) {
+                Room room = findRoomByNumber(booking.getRoomNumber());
             if (room != null && !room.isBooked()) {
                 bookings.add(booking);
                 customer.addBooking(booking); // Use Customer instance method instead of direct access
@@ -115,20 +113,20 @@ public class Hotel extends HotelEntity {
     }
 
     public void removeBooking(String bookingId, Customer customer) {
-        if (!isActive())                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        if (!isActive())
             throw new IllegalStateException("Hotel is inactive.");
-        Booking booking = findBookingById(bookingId);
-        if (booking != null && bookings.remove(booking)) {
-            Room room = findRoomByNumber(booking.getRoomNumber());
+            Booking booking = findBookingById(bookingId);
+            if (booking != null && bookings.remove(booking)) {
+                Room room = findRoomByNumber(booking.getRoomNumber());
             if (room != null)
-                room.setBooked(false);
+            room.setBooked(false);
             customer.removeBooking(booking); // Use Customer instance method instead of direct access
             System.out.println("Booking " + bookingId + " removed from " + name);
         } else {
             System.out.println("Booking " + bookingId + " not found.");
         }
     }
-
+    
     public Booking findBookingById(String bookingId) {
         for (Booking booking : bookings) {
             if (booking.getBookingId().equals(bookingId))
@@ -148,7 +146,7 @@ public class Hotel extends HotelEntity {
             System.out.println("Employee already exists or is invalid.");
         }
     }
-
+    
     public void removeEmployee(int employeeId) {
         if (!isActive())
             throw new IllegalStateException("Hotel is inactive.");
@@ -163,22 +161,22 @@ public class Hotel extends HotelEntity {
     public Employee findEmployeeById(int employeeId) {
         for (Employee employee : employees) {
             if (employee.getEmployeeID() == employeeId)
-                return employee;
+            return employee;
         }
         return null;
     }
-
+    
     // Display Functions
     public void displayRooms() {
         if (rooms.isEmpty())
-            System.out.println("No rooms in " + name + ".");
+        System.out.println("No rooms in " + name + ".");
         else {
             System.out.println("Rooms in " + name + " (" + status + "):");
             for (Room room : rooms)
-                System.out.println(room);
+            System.out.println(room);
         }
     }
-
+    
     public void displayBookings() {
         if (bookings.isEmpty())
             System.out.println("No bookings in " + name + ".");
@@ -186,27 +184,27 @@ public class Hotel extends HotelEntity {
             System.out.println("Bookings in " + name + " (" + status + "):");
             for (Booking booking : bookings)
                 System.out.println(booking);
+            }
         }
-    }
-
-    public void displayAvailableRooms() {
-        List<Room> available = getAvailableRooms();
-        if (available.isEmpty())
+        
+        public void displayAvailableRooms() {
+            List<Room> available = getAvailableRooms();
+            if (available.isEmpty())
             System.out.println("No available rooms in " + name + ".");
-        else {
-            System.out.println("Available rooms in " + name + ":");
+            else {
+                System.out.println("Available rooms in " + name + ":");
             for (Room room : available)
-                System.out.println(room);
+            System.out.println(room);
         }
     }
-
+    
     public void displayEmployees() {
         if (employees.isEmpty())
             System.out.println("No employees in " + name + ".");
         else {
             System.out.println("Employees in " + name + ":");
             for (Employee employee : employees)
-                System.out.println(employee);
+            System.out.println(employee);
         }
     }
 
@@ -220,18 +218,18 @@ public class Hotel extends HotelEntity {
             System.out.println("Hotel " + name + " activated (ID: " + id + ").");
         }
     }
-
+    
     @Override
     public void update() {
         if (!isActive())
             throw new IllegalStateException("Hotel is inactive.");
-        System.out.println("Hotel " + name + " updated. Location: " + location);
-    }
-
+            System.out.println("Hotel " + name + " updated. Location: " + location);
+        }
+        
     @Override
     public void delete() {
         if (!isActive())
-            System.out.println("Hotel " + name + " is already inactive.");
+        System.out.println("Hotel " + name + " is already inactive.");
         else {
             setStatus("Inactive");
             rooms.clear();
@@ -246,3 +244,5 @@ public class Hotel extends HotelEntity {
         return "Hotel: " + name + " (ID: " + id + ") at " + location + " [Status: " + status + "]";
     }
 }
+    // if (name == null || name.trim().isEmpty())
+    //     throw new IllegalArgumentException("Hotel name cannot be null or empty.");

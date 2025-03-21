@@ -20,10 +20,6 @@ public class Booking extends Room {
             String customerName, String customerPhoneNumber, String customerEmail, String customerCity,
             String customerCountry) {
         super(roomNumber, roomType, price, floor, viewType, hasBalcony, roomFacilities);
-        if (totalPrice < 0)
-            throw new IllegalArgumentException("Total price cannot be negative.");
-        if (customerName == null || customerName.trim().isEmpty())
-            throw new IllegalArgumentException("Customer name cannot be null or empty.");
         this.bookingId = "B" + String.format("%04d", ++bookingCount);
         this.bookingDate = bookingDate;
         this.checkIn = checkIn;
@@ -36,36 +32,36 @@ public class Booking extends Room {
         this.customerCountry = customerCountry;
         setBooked(true);
     }
-
+    
     // Getters and Setters
     public String getBookingId() {
         return bookingId;
     }
-
+    
     public static int getBookingCount() {
         return bookingCount;
     }
-
+    
     public String getBookingDate() {
         return bookingDate;
     }
-
+    
     public void setBookingDate(String bookingDate) {
         this.bookingDate = bookingDate;
     }
-
+    
     public String getCheckIn() {
         return checkIn;
     }
-
+    
     public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
-
+    
     public String getCheckOut() {
         return checkOut;
     }
-
+    
     public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
@@ -73,12 +69,12 @@ public class Booking extends Room {
     public double getTotalPrice() {
         return totalPrice;
     }
-
+    
     public void setTotalPrice(double totalPrice) {
         if (totalPrice >= 0)
-            this.totalPrice = totalPrice;
+        this.totalPrice = totalPrice;
     }
-
+    
     public String getCustomerName() {
         return customerName;
     }
@@ -86,16 +82,16 @@ public class Booking extends Room {
     public void setCustomerName(String customerName) {
         if (customerName != null && !customerName.trim().isEmpty())
             this.customerName = customerName;
+        }
+        
+        public String getCustomerPhoneNumber() {
+            return customerPhoneNumber;
     }
-
-    public String getCustomerPhoneNumber() {
-        return customerPhoneNumber;
-    }
-
+    
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
         this.customerPhoneNumber = customerPhoneNumber;
     }
-
+    
     public String getCustomerEmail() {
         return customerEmail;
     }
@@ -103,19 +99,19 @@ public class Booking extends Room {
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
     }
-
+    
     public String getCustomerCity() {
         return customerCity;
     }
-
+    
     public void setCustomerCity(String customerCity) {
         this.customerCity = customerCity;
     }
-
+    
     public String getCustomerCountry() {
         return customerCountry;
     }
-
+    
     public void setCustomerCountry(String customerCountry) {
         this.customerCountry = customerCountry;
     }
@@ -125,7 +121,7 @@ public class Booking extends Room {
         setBooked(false);
         System.out.println("Booking " + bookingId + " cancelled for " + customerName);
     }
-
+    
     public void updateBookingDates(String newCheckIn, String newCheckOut) {
         if (newCheckIn != null && newCheckOut != null) {
             this.checkIn = newCheckIn;
@@ -133,10 +129,14 @@ public class Booking extends Room {
             System.out.println("Booking " + bookingId + " dates updated: " + checkIn + " to " + checkOut);
         }
     }
-
+    
     @Override
     public String toString() {
         return "Booking " + bookingId + ": " + customerName + " | Room " + getRoomNumber() + " | Check-In: " + checkIn +
                 " | Check-Out: " + checkOut + " | Total: $" + totalPrice + " | Booked on: " + bookingDate;
     }
 }
+        // if (totalPrice < 0)
+        //     throw new IllegalArgumentException("Total price cannot be negative.");
+        // if (customerName == null || customerName.trim().isEmpty())
+        //     throw new IllegalArgumentException("Customer name cannot be null or empty.");
