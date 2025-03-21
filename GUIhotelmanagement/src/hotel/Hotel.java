@@ -22,8 +22,7 @@ public class Hotel extends HotelEntity {
         this.bookings = new ArrayList<>();
         this.employees = new ArrayList<>();
     }
-
-    // Getters and Setters
+    
     public String getName() {
         return name;
     }

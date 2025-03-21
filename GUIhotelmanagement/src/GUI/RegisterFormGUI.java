@@ -15,32 +15,24 @@ public class RegisterFormGUI extends Form {
     }
 
     private void addGuiComponents() {
-        // create register label
+        
         JLabel registerLabel = new JLabel("Register");
 
-        // configure component's x,y position and width/height values relative to the
-        // GUI
         registerLabel.setBounds(0, 25, 520, 100);
 
-        // change the font color
         registerLabel.setForeground(CommonConstants.TEXT_COLOR);
 
-        // change the font size
         registerLabel.setFont(new Font("Dialog", Font.BOLD, 40));
 
-        // center text
         registerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // add component to GUI
         add(registerLabel);
 
-        // create username label
         JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setBounds(30, 150, 400, 25);
         usernameLabel.setForeground(CommonConstants.TEXT_COLOR);
         usernameLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        // create username text field
         JTextField usernameField = new JTextField();
         usernameField.setBounds(30, 185, 450, 55);
         usernameField.setBackground(CommonConstants.SECONDARY_COLOR);
