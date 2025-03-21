@@ -11,15 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Admin extends User implements IAuthentication {
-    private String adminUserName;
-    private String adminPassword;
+    private String adminUserName = "admin";
+    private String adminPassword = "1234";
     static List<User> Users = new ArrayList<>();
+
 
     public Admin(String adminUserName, String adminPassword, String firstName, String lastName, String phoneNumber,
             String email, String password) {
         super(firstName, lastName, phoneNumber, email, password); // Pass userType as "Admin"
-        if (adminUserName == null || adminUserName.trim().isEmpty())
-            throw new IllegalArgumentException("Admin username cannot be null or empty.");
         this.adminUserName = adminUserName;
         this.adminPassword = adminPassword;
     }
