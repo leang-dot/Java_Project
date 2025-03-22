@@ -11,17 +11,14 @@ public class Payment extends Customer {
     private String paymentMethod;
     private String paymentId;
 
-    public Payment(int customerID, double amount, String paymentMethod, String firstName, String lastName,
-            String phoneNumber, String email, String password) {
+    public Payment(int customerID, String firstName, String lastName, String phoneNumber, String email,
+            String password, double amount, String paymentMethod, String paymentId) {
         super(customerID, firstName, lastName, phoneNumber, email, password);
-        if (amount < 0)
-            throw new IllegalArgumentException("Amount cannot be negative.");
-        if (paymentMethod == null || paymentMethod.trim().isEmpty())
-            throw new IllegalArgumentException("Payment method cannot be null or empty.");
         this.amount = amount;
         this.paymentMethod = paymentMethod;
-        this.paymentId = "P" + System.currentTimeMillis();
+        this.paymentId = paymentId;
     }
+
 
     // Getters and Setters
     public double getAmount() {

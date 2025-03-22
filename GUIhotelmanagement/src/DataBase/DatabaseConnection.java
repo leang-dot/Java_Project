@@ -17,4 +17,12 @@ public class DatabaseConnection {
             throw new SQLException("Failed to connect to database", e);
         }
     }
+
+    private static Connection datacon;
+    public static void Connectiondb(String user, String pass, String dbname, String server) throws Exception{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        datacon = DriverManager.getConnection("jdbc:mysql://"+server+"/"+dbname, user, pass);
+    }
+
+
 }

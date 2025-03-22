@@ -8,10 +8,14 @@ import DataBase.DatabaseConnection;
 
 public class Admin extends User {
     private int adminId;
+    private String adminEmail = "Admin";
+    private String adminPassword = "1234";
 
-    public Admin(int adminId, String username, String firstName, String lastName, String phoneNumber, String email, String password) {
-        super(username, firstName, lastName, phoneNumber, email, password);
+    public Admin(int adminId, String adminEmail, String adminPassword,String firstName, String lastName, String phoneNumber, String email, String password) {
+        super(firstName, lastName, phoneNumber, email, password);
         this.adminId = adminId;
+        this.adminEmail = adminEmail;
+        this.adminPassword = adminPassword;
     }
 
     public int getAdminId() {
@@ -82,11 +86,10 @@ public class Admin extends User {
 
     public void addEmployee(Employee employee) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String sql = "INSERT INTO employee (employee_id, username, phone_number, email, password, employee_role, salary, address, date_of_birth, hire_date, work_status, work_schedule) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO employee (employee_id, phone_number, email, password, employee_role, salary, address, date_of_birth, hire_date, work_status, work_schedule) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, employee.getEmployeeId());
-            stmt.setString(2, employee.getUsername());
             stmt.setString(3, employee.getPhoneNumber());
             stmt.setString(4, employee.getEmail());
             stmt.setString(5, employee.getPassword());
@@ -108,8 +111,7 @@ public class Admin extends User {
             String sql = "INSERT INTO customer (customer_id, username, phone_number, email, password) " +
                         "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, customer.getCustomerId());
-            stmt.setString(2, customer.getUsername());
+            stmt.setInt(1, customer.getCustomerID());
             stmt.setString(3, customer.getPhoneNumber());
             stmt.setString(4, customer.getEmail());
             stmt.setString(5, customer.getPassword());
