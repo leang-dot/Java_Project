@@ -1,447 +1,169 @@
 package user;
 
-import DataBase.DatabaseConnection;
-import interfaces.IAuthentication;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.ResultSet;
+import DataBase.DatabaseConnection;
 
-public class Admin extends User implements IAuthentication {
-    private String adminUserName = "admin";
-    private String adminPassword = "1234";
-    static List<User> Users = new ArrayList<>();
+public class Admin extends User {
+    private int adminId;
 
-
-    public Admin(String adminUserName, String adminPassword, String firstName, String lastName, String phoneNumber,
-            String email, String password) {
-        super(firstName, lastName, phoneNumber, email, password); // Pass userType as "Admin"
-        this.adminUserName = adminUserName;
-        this.adminPassword = adminPassword;
+    public Admin(int adminId, String username, String firstName, String lastName, String phoneNumber, String email, String password) {
+        super(username, firstName, lastName, phoneNumber, email, password);
+        this.adminId = adminId;
     }
 
-    // Getters and Setters
-    public String getAdminUserName() {
-        return adminUserName;
+    public int getAdminId() {
+        return adminId;
     }
 
-    public void setAdminUserName(String adminUserName) {
-        if (adminUserName != null && !adminUserName.trim().isEmpty())
-            this.adminUserName = adminUserName;
-    }
-
-    public String getAdminPassword() {
-        return adminPassword;
-    }
-
-    public void setAdminPassword(String adminPassword) {
-        this.adminPassword = adminPassword;
-    }
-
-    public List<User> getUsers() {
-        return new ArrayList<>(Users);
-    }
-
-    // IAuthentication Implementation
-
-    @Override
     public boolean checkIn(String bookingId, int roomNumber) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);
-            String roomCheckSql = "SELECT status FROM rooms WHERE room_number = ? FOR UPDATE";
-            PreparedStatement roomCheckStmt = conn.prepareStatement(roomCheckSql);
-            roomCheckStmt.setInt(1, roomNumber);
-            ResultSet roomRs = roomCheckStmt.executeQuery();
-
-            if (roomRs.next() && "available".equals(roomRs.getString("status"))) {
-                String bookingCheckSql = "SELECT b.id, b.status FROM bookings b WHERE b.booking_id = ? AND b.room_number = ? FOR UPDATE";
-                PreparedStatement bookingCheckStmt = conn.prepareStatement(bookingCheckSql);
-                bookingCheckStmt.setString(1, bookingId);
-                bookingCheckStmt.setInt(2, roomNumber);
-                ResultSet bookingRs = bookingCheckStmt.executeQuery();
-
-                if (bookingRs.next() && "reserved".equals(bookingRs.getString("status"))) {
-                    String updateBookingSql = "UPDATE bookings SET status = ?, check_in_date = ? WHERE booking_id = ? AND room_number = ?";
-                    PreparedStatement updateBookingStmt = conn.prepareStatement(updateBookingSql);
-                    updateBookingStmt.setString(1, "checked_in");
-                    updateBookingStmt.setString(2, LocalDate.now().toString());
-                    updateBookingStmt.setString(3, bookingId);
-                    updateBookingStmt.setInt(4, roomNumber);
-                    updateBookingStmt.executeUpdate();
-
-                    String updateRoomSql = "UPDATE rooms SET status = 'occupied' WHERE room_number = ?";
-                    PreparedStatement updateRoomStmt = conn.prepareStatement(updateRoomSql);
-                    updateRoomStmt.setInt(1, roomNumber);
-                    updateRoomStmt.executeUpdate();
-
-                    conn.commit();
-                    System.out.println("Check-in successful for booking " + bookingId + " in room " + roomNumber);
-                    return true;
-                } else {
-                    System.out.println(
-                            "Booking " + bookingId + " not found or not reserved for room " + roomNumber + ".");
-                }
-            } else {
-                System.out.println("Room " + roomNumber + " is not available.");
+            String bookingSql = "SELECT room_id FROM booking WHERE booking_id = ?";
+            PreparedStatement bookingStmt = conn.prepareStatement(bookingSql);
+            bookingStmt.setInt(1, Integer.parseInt(bookingId));
+            ResultSet rs = bookingStmt.executeQuery();
+            if (!rs.next()) {
+                return false;
             }
-            conn.rollback();
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Error during check-in: " + e.getMessage());
+            int roomId = rs.getInt("room_id");
+
+            String roomSql = "SELECT room_id FROM room WHERE room_number = ? AND room_id = ?";
+            PreparedStatement roomStmt = conn.prepareStatement(roomSql);
+            roomStmt.setString(1, String.valueOf(roomNumber));
+            roomStmt.setInt(2, roomId);
+            ResultSet roomRs = roomStmt.executeQuery();
+            if (!roomRs.next()) {
+                return false;
+            }
+
+            String updateRoomSql = "UPDATE room SET is_booked = TRUE WHERE room_id = ?";
+            PreparedStatement updateRoomStmt = conn.prepareStatement(updateRoomSql);
+            updateRoomStmt.setInt(1, roomId);
+            updateRoomStmt.executeUpdate();
+
+            return true;
+        } catch (SQLException | NumberFormatException e) {
             return false;
         }
     }
 
-    @Override
     public boolean checkOut(String bookingId, int roomNumber) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);
-            String bookingCheckSql = "SELECT b.id, b.status FROM bookings b WHERE b.booking_id = ? AND b.room_number = ? FOR UPDATE";
-            PreparedStatement bookingCheckStmt = conn.prepareStatement(bookingCheckSql);
-            bookingCheckStmt.setString(1, bookingId);
-            bookingCheckStmt.setInt(2, roomNumber);
-            ResultSet bookingRs = bookingCheckStmt.executeQuery();
-
-            if (bookingRs.next() && "checked_in".equals(bookingRs.getString("status"))) {
-                String updateBookingSql = "UPDATE bookings SET status = ?, check_out_date = ? WHERE booking_id = ? AND room_number = ?";
-                PreparedStatement updateBookingStmt = conn.prepareStatement(updateBookingSql);
-                updateBookingStmt.setString(1, "checked_out");
-                updateBookingStmt.setString(2, LocalDate.now().toString());
-                updateBookingStmt.setString(3, bookingId);
-                updateBookingStmt.setInt(4, roomNumber);
-                updateBookingStmt.executeUpdate();
-
-                String updateRoomSql = "UPDATE rooms SET status = 'available' WHERE room_number = ?";
-                PreparedStatement updateRoomStmt = conn.prepareStatement(updateRoomSql);
-                updateRoomStmt.setInt(1, roomNumber);
-                updateRoomStmt.executeUpdate();
-
-                conn.commit();
-                System.out.println("Check-out successful for booking " + bookingId + " from room " + roomNumber);
-                return true;
-            } else {
-                System.out
-                        .println("Booking " + bookingId + " not found or not checked in for room " + roomNumber + ".");
+            String bookingSql = "SELECT room_id FROM booking WHERE booking_id = ?";
+            PreparedStatement bookingStmt = conn.prepareStatement(bookingSql);
+            bookingStmt.setInt(1, Integer.parseInt(bookingId));
+            ResultSet rs = bookingStmt.executeQuery();
+            if (!rs.next()) {
+                return false;
             }
-            conn.rollback();
-            return false;
-        } catch (SQLException e) {
-            System.out.println("Error during check-out: " + e.getMessage());
+            int roomId = rs.getInt("room_id");
+
+            String roomSql = "SELECT room_id FROM room WHERE room_number = ? AND room_id = ?";
+            PreparedStatement roomStmt = conn.prepareStatement(roomSql);
+            roomStmt.setString(1, String.valueOf(roomNumber));
+            roomStmt.setInt(2, roomId);
+            ResultSet roomRs = roomStmt.executeQuery();
+            if (!roomRs.next()) {
+                return false;
+            }
+
+            String updateRoomSql = "UPDATE room SET is_booked = FALSE WHERE room_id = ?";
+            PreparedStatement updateRoomStmt = conn.prepareStatement(updateRoomSql);
+            updateRoomStmt.setInt(1, roomId);
+            updateRoomStmt.executeUpdate();
+
+            return true;
+        } catch (SQLException | NumberFormatException e) {
             return false;
         }
     }
 
-    // Add Employee
-    private void addEmployee(Employee employee) {
+    public void addEmployee(Employee employee) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);
-            String sql = "INSERT INTO users (first_name, last_name, phone_number, email, password, user_type, employee_id, employee_role, salary, address, date_of_birth, hire_date, work_status, work_schedule) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO employee (employee_id, username, phone_number, email, password, employee_role, salary, address, date_of_birth, hire_date, work_status, work_schedule) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, employee.getFirstName());
-            stmt.setString(2, employee.getLastName());
+            stmt.setInt(1, employee.getEmployeeId());
+            stmt.setString(2, employee.getUsername());
             stmt.setString(3, employee.getPhoneNumber());
             stmt.setString(4, employee.getEmail());
             stmt.setString(5, employee.getPassword());
-            stmt.setString(6, "Employee");
-            stmt.setInt(7, employee.getEmployeeID());
-            stmt.setString(8, employee.getEmployeeRole());
-            stmt.setDouble(9, employee.getSalary());
-            stmt.setString(10, employee.getAddress());
-            stmt.setString(11, employee.getDateOfBirth());
-            stmt.setString(12, employee.getHireDate());
-            stmt.setString(13, employee.getWorkStatus());
-            stmt.setString(14, employee.getWorkSchedule());
+            stmt.setString(6, employee.getRole());
+            stmt.setDouble(7, employee.getSalary());
+            stmt.setString(8, employee.getAddress());
+            stmt.setString(9, employee.getDateOfBirth());
+            stmt.setString(10, employee.getHireDate());
+            stmt.setString(11, employee.getWorkStatus());
+            stmt.setString(12, employee.getWorkSchedule());
             stmt.executeUpdate();
-
-            conn.commit();
-            Users.add(employee);
-            System.out.println("Employee " + employee.getFirstName() + " added successfully!");
         } catch (SQLException e) {
-            System.out.println("Error adding employee: " + e.getMessage());
+            throw new RuntimeException("Error adding employee: " + e.getMessage());
         }
     }
 
-    // Add Customer
-    private void addCustomer(Customer customer) {
+    public void addCustomer(Customer customer) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);
-            String sql = "INSERT INTO users (first_name, last_name, phone_number, email, password, user_type, customer_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO customer (customer_id, username, phone_number, email, password) " +
+                        "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, customer.getFirstName());
-            stmt.setString(2, customer.getLastName());
+            stmt.setInt(1, customer.getCustomerId());
+            stmt.setString(2, customer.getUsername());
             stmt.setString(3, customer.getPhoneNumber());
             stmt.setString(4, customer.getEmail());
             stmt.setString(5, customer.getPassword());
-            stmt.setString(6, "Customer");
-            stmt.setInt(7, customer.getCustomerID());
             stmt.executeUpdate();
-
-            conn.commit();
-            Users.add(customer);
-            System.out.println("Customer " + customer.getFirstName() + " added successfully!");
         } catch (SQLException e) {
-            System.out.println("Error adding customer: " + e.getMessage());
+            throw new RuntimeException("Error adding customer: " + e.getMessage());
         }
     }
 
-    // Remove Employee
-    private void removeEmployee(int employeeId) {
+    public void removeEmployee(int employeeId) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);
-            User user = findUserById(employeeId, "Employee");
-            if (user != null && !this.email.equals(user.getEmail())) {
-                String deleteSql = "DELETE FROM users WHERE employee_id = ? AND user_type = 'Employee'";
-                PreparedStatement deleteStmt = conn.prepareStatement(deleteSql);
-                deleteStmt.setInt(1, employeeId);
-                int rowsAffected = deleteStmt.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    Users.remove(user);
-                    System.out.println("Employee " + employeeId + " removed successfully!");
-                } else {
-                    System.out.println("Employee " + employeeId + " not found!");
-                }
-                conn.commit();
-            } else {
-                System.out.println("Cannot remove admin or self!");
-                conn.rollback();
-            }
-        } catch (SQLException e) {
-            System.out.println("Error removing employee: " + e.getMessage());
-            if (e.getMessage().contains("foreign key constraint")) {
-                System.out.println("Employee " + employeeId
-                        + " has existing bookings or other dependencies and cannot be removed.");
-            }
-            try (Connection conn = DatabaseConnection.getConnection()) {
-                conn.rollback();
-            } catch (SQLException rollbackEx) {
-                System.out.println("Error during rollback: " + rollbackEx.getMessage());
-            }
-        }
-    }
-
-    // Remove Customer
-    private void removeCustomer(int customerId) {
-        Connection conn = null;
-        try {
-            conn = DatabaseConnection.getConnection();
-            conn.setAutoCommit(false);
-            User user = findUserById(customerId, "Customer");
-            if (user != null && !this.email.equals(user.getEmail())) {
-                String deleteSql = "DELETE FROM users WHERE customer_id = ? AND user_type = 'Customer'";
-                PreparedStatement deleteStmt = conn.prepareStatement(deleteSql);
-                deleteStmt.setInt(1, customerId);
-                int rowsAffected = deleteStmt.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    Users.remove(user);
-                    System.out.println("Customer " + customerId + " removed successfully!");
-                } else {
-                    System.out.println("Customer " + customerId + " not found!");
-                }
-                conn.commit();
-            } else {
-                System.out.println("Cannot remove admin or self!");
-                conn.rollback();
-            }
-        } catch (SQLException e) {
-            System.out.println("Error removing customer: " + e.getMessage());
-            if (e.getMessage().contains("foreign key constraint")) {
-                System.out.println("Customer " + customerId + " has existing bookings and cannot be removed.");
-            }
-            try {
-                // Rollback on error
-                if (conn != null) {
-                    conn.rollback();
-                }
-            } catch (SQLException rollbackEx) {
-                System.out.println("Error during rollback: " + rollbackEx.getMessage());
-            }
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    System.out.println("Error closing connection: " + e.getMessage());
-                }
-            }
-        }
-    }
-
-    // Update Employee
-
-    public void updateEmployee(int employeeId, String newFirstName, String newLastName, String newPhoneNumber,
-            String newEmail) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);
-            User user = findUserById(employeeId, "Employee");
-            if (user != null && !this.email.equals(user.getEmail())) {
-                String sql = "UPDATE users SET first_name = ?, last_name = ?, phone_number = ?, email = ? WHERE employee_id = ? AND user_type = 'Employee'";
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                stmt.setString(1, newFirstName);
-                stmt.setString(2, newLastName);
-                stmt.setString(3, newPhoneNumber);
-                stmt.setString(4, newEmail);
-                stmt.setInt(5, employeeId);
-                int rowsAffected = stmt.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    user.setFirstName(newFirstName);
-                    user.setLastName(newLastName);
-                    user.setPhoneNumber(newPhoneNumber);
-                    user.setEmail(newEmail);
-                    System.out.println("Employee " + employeeId + " updated successfully!");
-                } else {
-                    System.out.println("Employee " + employeeId + " not found or update failed!");
-                }
-                conn.commit();
-            } else {
-                System.out.println("Cannot update admin or self data!");
-                conn.rollback();
-            }
-        } catch (SQLException e) {
-            System.out.println("Error updating employee: " + e.getMessage());
-            try (Connection conn = DatabaseConnection.getConnection()) {
-                conn.rollback();
-            } catch (SQLException rollbackEx) {
-                System.out.println("Error during rollback: " + rollbackEx.getMessage());
-            }
-        }
-    }
-
-    // Update Customer
-
-    public void updateCustomer(int customerId, String newFirstName, String newLastName, String newPhoneNumber,
-            String newEmail) {
-
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false);
-            User user = findUserById(customerId, "Customer");
-            if (user != null && !this.email.equals(user.getEmail())) {
-                String sql = "UPDATE users SET first_name = ?, last_name = ?, phone_number = ?, email = ? WHERE customer_id = ? AND user_type = 'Customer'";
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                stmt.setString(1, newFirstName);
-                stmt.setString(2, newLastName);
-                stmt.setString(3, newPhoneNumber);
-                stmt.setString(4, newEmail);
-                stmt.setInt(5, customerId);
-                int rowsAffected = stmt.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    user.setFirstName(newFirstName);
-                    user.setLastName(newLastName);
-                    user.setPhoneNumber(newPhoneNumber);
-                    user.setEmail(newEmail);
-                    System.out.println("Customer " + customerId + " updated successfully!");
-                } else {
-                    System.out.println("Customer " + customerId + " not found or update failed!");
-                }
-                conn.commit();
-            } else {
-                System.out.println("Cannot update admin or self data!");
-                conn.rollback();
-            }
-        } catch (SQLException e) {
-            System.out.println("Error updating customer: " + e.getMessage());
-            try (Connection conn = DatabaseConnection.getConnection()) {
-                conn.rollback();
-            } catch (SQLException rollbackEx) {
-                System.out.println("Error during rollback: " + rollbackEx.getMessage());
-            }
-        }
-    }
-
-    // Helper method to find user by ID and type (made public for Main class access)
-    private User findUserById(int id, String userType) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            String sql = "SELECT * FROM users WHERE ";
-            if ("Employee".equals(userType)) {
-                sql += "employee_id = ? AND user_type = 'Employee'";
-            } else if ("Customer".equals(userType)) {
-                sql += "customer_id = ? AND user_type = 'Customer'";
-            } else {
-                return null; // Invalid user type
-            }
+            String sql = "DELETE FROM employee WHERE employee_id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                User user;
-                if ("Employee".equals(rs.getString("user_type"))) {
-                    user = new Employee(
-                            rs.getInt("employee_id"),
-                            rs.getString("employee_role"),
-                            rs.getDouble("salary"),
-                            rs.getString("address"),
-                            rs.getString("date_of_birth"),
-                            rs.getString("hire_date"),
-                            rs.getString("work_status"),
-                            rs.getString("work_schedule"),
-                            rs.getString("first_name"),
-                            rs.getString("last_name"),
-                            rs.getString("phone_number"),
-                            rs.getString("email"),
-                            rs.getString("password"));
-                } else if ("Customer".equals(rs.getString("user_type"))) {
-                    user = new Customer(
-                            rs.getInt("customer_id"),
-                            rs.getString("first_name"),
-                            rs.getString("last_name"),
-                            rs.getString("phone_number"),
-                            rs.getString("email"),
-                            rs.getString("password"));
-                } else {
-                    return null; // Should not happen with proper user_type check
-                }
-                return user;
-            }
+            stmt.setInt(1, employeeId);
+            stmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error finding user by ID: " + e.getMessage());
+            throw new RuntimeException("Error removing employee: " + e.getMessage());
         }
-        return null;
     }
 
-    // View All Users
-    private void viewAllUsers() {
+    public void removeCustomer(int customerId) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String sql = "SELECT * FROM users";
+            String sql = "DELETE FROM customer WHERE customer_id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-
-            if (!rs.isBeforeFirst())
-                System.out.println("No users found.");
-            else {
-                System.out.println("========All Users=======");
-                while (rs.next()) {
-                    String userType = rs.getString("user_type");
-                    System.out.println("Type: " + userType);
-                    System.out.println("ID: " + (rs.getObject("employee_id") != null ? rs.getInt("employee_id")
-                            : rs.getObject("customer_id") != null ? rs.getInt("customer_id") : "N/A"));
-                    System.out.println("Name: " + rs.getString("first_name") + " " + rs.getString("last_name"));
-                    System.out.println("Phone: " + rs.getString("phone_number"));
-                    System.out.println("Email: " + rs.getString("email"));
-                    if ("Employee".equals(userType)) {
-                        System.out.println("Role: " + rs.getString("employee_role"));
-                        System.out.println("Salary: " + rs.getDouble("salary"));
-                        System.out.println("Address: " + rs.getString("address"));
-                        System.out.println("Date of Birth: " + rs.getString("date_of_birth"));
-                        System.out.println("Hire Date: " + rs.getString("hire_date"));
-                        System.out.println("Work Status: " + rs.getString("work_status"));
-                        System.out.println("Work Schedule: " + rs.getString("work_schedule"));
-                    } else if ("Customer".equals(userType)) {
-                        System.out.println("Customer ID: " + rs.getInt("customer_id"));
-                    } else if ("Admin".equals(userType)) {
-                        System.out.println("Admin Username: " + rs.getString("admin_username"));
-                    }
-                    System.out.println("-----------------------");
-                }
-            }
+            stmt.setInt(1, customerId);
+            stmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error viewing users: " + e.getMessage());
+            throw new RuntimeException("Error removing customer: " + e.getMessage());
+        }
+    }
+
+    public void updateEmployee(int employeeId, String firstName, String lastName, String phoneNumber, String email) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "UPDATE employee SET phone_number = ?, email = ? WHERE employee_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, phoneNumber);
+            stmt.setString(2, email);
+            stmt.setInt(3, employeeId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating employee: " + e.getMessage());
+        }
+    }
+
+    public void updateCustomer(int customerId, String firstName, String lastName, String phoneNumber, String email) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "UPDATE customer SET phone_number = ?, email = ? WHERE customer_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, phoneNumber);
+            stmt.setString(2, email);
+            stmt.setInt(3, customerId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating customer: " + e.getMessage());
         }
     }
 }
