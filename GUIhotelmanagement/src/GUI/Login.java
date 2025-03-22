@@ -1,21 +1,11 @@
 package GUI;
 
-import DataBase.DatabaseConnection;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import javax.swing.*;
 
 public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
     }
                        
     private void initComponents() {
@@ -138,21 +128,6 @@ public class Login extends javax.swing.JFrame {
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {
     }                                           
-
-    
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
-        
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            if (connection != null) {
-                JOptionPane.showMessageDialog(this, "Connected Successfully!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Connection failed!");
-            }
-        } catch (SQLException e) {
-            System.err.println("Connection error: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
 

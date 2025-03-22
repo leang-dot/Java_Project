@@ -1,9 +1,21 @@
 package GUI;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+import DataBase.DatabaseConnection;
+
 public class MainForm extends javax.swing.JFrame {
 
     public MainForm() {
         initComponents();
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
     }
 
     @SuppressWarnings("")
@@ -89,6 +101,20 @@ public class MainForm extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(516, 530));
         setLocationRelativeTo(null);
     }// </editor-fold>                        
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+        
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            if (connection != null) {
+                JOptionPane.showMessageDialog(this, "Connected Successfully!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Connection failed!");
+            }
+        } catch (SQLException e) {
+            System.err.println("Connection error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         Login.main(null);
