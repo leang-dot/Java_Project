@@ -18,3 +18,15 @@ public class DatabaseTest {
     }
 }
 
+// private void formWindowOpened(java.awt.event.WindowEvent evt) {
+//     try (Connection connection = DatabaseConnection.getConnection()) {
+//         if (connection != null) {
+//             System.out.println("Database connection successful!");
+//         } else {
+//             System.out.println("Failed to make connection!");
+//         }
+//     } catch (SQLException e) {
+//         System.err.println("Connection error: " + e.getMessage());
+//         e.printStackTrace();
+//     }
+// } 
