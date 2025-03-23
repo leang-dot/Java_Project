@@ -16,8 +16,8 @@ public class Hotel extends HotelEntity {
 
     public Hotel(String id, String status, String name, String location) {
         super(id, status);
-        // if (name == null || name.trim().isEmpty())
-        //     throw new IllegalArgumentException("Hotel name cannot be null or empty.");
+        if (name == null || name.trim().isEmpty())
+            throw new IllegalArgumentException("Hotel name cannot be null or empty.");
         this.name = name;
         this.location = location;
         this.rooms = new ArrayList<>();
