@@ -11,15 +11,9 @@ public class Employee extends User {
     private String workSchedule;
 
     public Employee(int employeeId, String role, double salary, String address, String dateOfBirth, String hireDate,
-                    String workStatus, String workSchedule, String username, String firstName, String lastName, 
+                    String workStatus, String workSchedule, String firstName, String lastName, 
                     String phoneNumber, String email, String password) {
-        super(username, firstName, lastName, phoneNumber, email, password);
-        if (employeeId < 0) {
-            throw new IllegalArgumentException("Employee ID cannot be negative.");
-        }
-        if (salary < 0) {
-            throw new IllegalArgumentException("Salary cannot be negative.");
-        }
+        super(firstName, lastName, phoneNumber, email, password);
         this.employeeId = employeeId;
         this.role = role;
         this.salary = salary;

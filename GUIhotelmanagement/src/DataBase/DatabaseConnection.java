@@ -17,4 +17,5 @@ public class DatabaseConnection {
             throw new SQLException("Failed to connect to database", e);
         }
     }
+
 }

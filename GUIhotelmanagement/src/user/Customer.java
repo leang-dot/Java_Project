@@ -1,17 +1,18 @@
 package user;
 
 public class Customer extends User {
-    private int customerId;
-
+    protected int customerID;
+    
     public Customer(int customerId, String username, String firstName, String lastName, String phoneNumber, String email, String password) {
-        super(username, firstName, lastName, phoneNumber, email, password);
-        if (customerId < 0) {
-            throw new IllegalArgumentException("Customer ID cannot be negative.");
-        }
-        this.customerId = customerId;
+        super(firstName, lastName, phoneNumber, email, password);
+        this.customerID = customerID;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 }
