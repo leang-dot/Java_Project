@@ -1,6 +1,11 @@
 package GUI;
 
-import javax.swing.JOptionPane;
+
+
+import javax.swing.*;
+import java.sql.*;
+
+import DataBase.DatabaseConnection;
 
 public class SignUp extends javax.swing.JFrame {
 
@@ -8,8 +13,7 @@ public class SignUp extends javax.swing.JFrame {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    @SuppressWarnings("unchecked")                         
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -209,6 +213,13 @@ public class SignUp extends javax.swing.JFrame {
 
         // if the password and cornfirm password are the same
         if(password.equals(cornfirmPassword)) {
+            try {
+                Connection conn = DatabaseConnection.getConnection();
+                Statement s = conn.createStatement();
+                s.executeUpdate("INSERT INTO Customer (first_name, last_name, phone_number, email, password) VALUES ('"+firstName+"', '"+lastName+"', '"+phoneNumber+"', '"+email+"', '"+password+"')");
+            } catch (Exception e) {
+                
+            }
             JOptionPane.showMessageDialog(this, "Sign up successfully");
         } // if the password and cornfirm password are not the same
         else if(password.equals("") || cornfirmPassword.equals("")){

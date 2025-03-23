@@ -1,5 +1,10 @@
 package GUI;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import DataBase.DatabaseConnection;
+
 public class MainForm extends javax.swing.JFrame {
 
     public MainForm() {
@@ -7,7 +12,6 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -18,6 +22,11 @@ public class MainForm extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -118,6 +127,19 @@ public class MainForm extends javax.swing.JFrame {
         AdminLogin.main(null);
         this.dispose();
     }
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            if (connection != null) {
+                System.out.println("Database connection successful!");
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (SQLException e) {
+            System.err.println("Connection error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    } 
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         EmployeeLogin.main(null);
