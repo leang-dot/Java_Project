@@ -20,6 +20,10 @@ public class Booking extends Room {
             String customerName, String customerPhoneNumber, String customerEmail, String customerCity,
             String customerCountry) {
         super(roomNumber, roomType, price, floor, viewType, hasBalcony, roomFacilities);
+        if (totalPrice < 0)
+            throw new IllegalArgumentException("Total price cannot be negative.");
+        if (customerName == null || customerName.trim().isEmpty())
+            throw new IllegalArgumentException("Customer name cannot be null or empty.");
         this.bookingId = "B" + String.format("%04d", ++bookingCount);
         this.bookingDate = bookingDate;
         this.checkIn = checkIn;
@@ -136,7 +140,3 @@ public class Booking extends Room {
                 " | Check-Out: " + checkOut + " | Total: $" + totalPrice + " | Booked on: " + bookingDate;
     }
 }
-        // if (totalPrice < 0)
-        //     throw new IllegalArgumentException("Total price cannot be negative.");
-        // if (customerName == null || customerName.trim().isEmpty())
-        //     throw new IllegalArgumentException("Customer name cannot be null or empty.");
