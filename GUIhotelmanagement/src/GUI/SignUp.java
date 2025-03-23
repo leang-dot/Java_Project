@@ -1,6 +1,6 @@
 package GUI;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 public class SignUp extends javax.swing.JFrame {
 
@@ -8,7 +8,8 @@ public class SignUp extends javax.swing.JFrame {
         initComponents();
     }
 
-    @SuppressWarnings("")                         
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -25,8 +26,8 @@ public class SignUp extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         txtCornfirmPassword = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSignUp = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,17 +61,17 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Sign Up");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSignUp.setText("Sign Up");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSignUpActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Login");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -100,9 +101,9 @@ public class SignUp extends javax.swing.JFrame {
                     .addComponent(txtEmail)
                     .addComponent(txtPassword)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnSignUp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(btnLogin))
                     .addComponent(txtCornfirmPassword)
                     .addComponent(txtPhoneNumber)
                     .addComponent(txtLastName, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -139,8 +140,8 @@ public class SignUp extends javax.swing.JFrame {
                     .addComponent(txtCornfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnLogin)
+                    .addComponent(btnSignUp))
                 .addGap(40, 40, 40))
         );
 
@@ -159,18 +160,22 @@ public class SignUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-    private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {
+    private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
     }                                           
 
-    private void txtPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {
+    private void txtPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
     }                                              
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
         Login.main(null);
         this.dispose();
     }                                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        
         String firstName = txtFirstName.getText();
         // for the first name only text is allowed
         if(!firstName.matches("[a-zA-Z]+")) {
@@ -214,12 +219,10 @@ public class SignUp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "anything else is wrong");
             
         }
-      
-    }
+    }                                         
 
-
-    
     public static void main(String args[]) {
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -247,8 +250,8 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSignUp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -265,4 +268,3 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField txtPhoneNumber;
     // End of variables declaration                   
 }
-

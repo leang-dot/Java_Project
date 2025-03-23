@@ -1,6 +1,6 @@
 package GUI;
 
-public class AppLauncher {
+public class App {
     public static void main(String[] args) {
         new MainForm().setVisible(true);
     }
