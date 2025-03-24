@@ -239,12 +239,13 @@ public class SignUp extends javax.swing.JFrame {
 
         // if the password and cornfirm password are the same
         if(password.equals(cornfirmPassword)) {
-            try {
-                Connection conn = DatabaseConnection.getConnection();
+            try(Connection conn = DatabaseConnection.getConnection()) {
+                
                 Statement s = conn.createStatement();
                 s.executeUpdate("INSERT INTO Customer (first_name, last_name, phone_number, email, password) VALUES ('"+firstName+"', '"+lastName+"', '"+phoneNumber+"', '"+email+"', '"+password+"')");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
+                return;
             }
             JOptionPane.showMessageDialog(this, "Sign up successfully");
             Login.main(null);
