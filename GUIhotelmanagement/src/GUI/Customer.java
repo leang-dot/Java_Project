@@ -6,7 +6,8 @@ public class Customer extends javax.swing.JFrame {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")                          
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -26,10 +27,9 @@ public class Customer extends javax.swing.JFrame {
         jLCustomerHeader.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLCustomerHeader.setText("WELCOME CUSTOMER");
 
-        btnLogOut.setBackground(new java.awt.Color(255, 0, 51));
         btnLogOut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogOut.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogOut.setText("Log Out");
+        btnLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout.png"))); // NOI18N
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogOutActionPerformed(evt);
@@ -43,17 +43,17 @@ public class Customer extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(201, Short.MAX_VALUE)
                 .addComponent(jLCustomerHeader)
-                .addGap(133, 133, 133)
-                .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(186, 186, 186)
+                .addComponent(btnLogOut)
+                .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogOut)
-                    .addComponent(jLCustomerHeader))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLCustomerHeader)
+                    .addComponent(btnLogOut))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -97,7 +97,7 @@ public class Customer extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBooking)
                     .addComponent(btnViewRoom))
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
