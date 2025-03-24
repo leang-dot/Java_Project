@@ -1,5 +1,8 @@
 package GUI;
 
+import DataBase.DatabaseConnection;
+import java.sql.*;
+
 import javax.swing.*;
 
 public class Login extends javax.swing.JFrame {
@@ -7,8 +10,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    @SuppressWarnings("unchecked")                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -154,13 +156,25 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        String username = txtEmail.getText();
+        String email = txtEmail.getText();
         String password = String.valueOf(txtPassword.getPassword());
-        System.out.println(username + " " +  password);
+        System.out.println(email + " " +  password);
 
         // check data frome table Customer in database
-        if((username.equals(password))){
+        try {
+            Connection conn = DatabaseConnection.getConnection();
+            Statement s = conn.createStatement();
+            ResultSet r = s.executeQuery("SELECT * FROM customer WHERE email = '" + email + "' AND password = '" + password + "'");
+            if(r.first()){
+                JOptionPane.showMessageDialog(this, "Login Successfully!");
+                Customer.main(null);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid Email or Password!");
+            }
 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
         }
         
         
