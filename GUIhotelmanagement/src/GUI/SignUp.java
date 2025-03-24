@@ -242,7 +242,7 @@ public class SignUp extends javax.swing.JFrame {
             try {
                 Connection conn = DatabaseConnection.getConnection();
                 Statement s = conn.createStatement();
-                s.executeQuery("INSERT INTO Customer (first_name, last_name, phone_number, email, password) VALUES ('"+firstName+"', '"+lastName+"', '"+phoneNumber+"', '"+email+"', '"+password+"')");
+                s.executeUpdate("INSERT INTO Customer (first_name, last_name, phone_number, email, password) VALUES ('"+firstName+"', '"+lastName+"', '"+phoneNumber+"', '"+email+"', '"+password+"')");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }

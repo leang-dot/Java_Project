@@ -2,7 +2,6 @@ package GUI;
 
 import DataBase.DatabaseConnection;
 import java.sql.*;
-
 import javax.swing.*;
 
 public class Login extends javax.swing.JFrame {
@@ -10,7 +9,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
-    @SuppressWarnings("unchecked")                          
+                        
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -161,22 +160,22 @@ public class Login extends javax.swing.JFrame {
         System.out.println(email + " " +  password);
 
         // check data frome table Customer in database
-        try {
-            Connection conn = DatabaseConnection.getConnection();
-            Statement s = conn.createStatement();
-            ResultSet r = s.executeQuery("SELECT * FROM customer WHERE email = '" + email + "' AND password = '" + password + "'");
-            if(r.first()){
-                JOptionPane.showMessageDialog(this, "Login Successfully!");
-                Customer.main(null);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid Email or Password!");
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT email, password FROM Customer WHERE email = ? AND password = ?")) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(this, "Login Successfully!");
+                    Customer.main(null);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Email or Password!");
+                }
             }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
-        
         
     }                                        
 
@@ -200,9 +199,6 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                           
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(() -> {

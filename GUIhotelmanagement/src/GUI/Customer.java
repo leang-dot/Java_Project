@@ -43,8 +43,8 @@ public class Customer extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(201, Short.MAX_VALUE)
                 .addComponent(jLCustomerHeader)
-                .addGap(149, 149, 149)
-                .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133)
+                .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -112,7 +112,8 @@ public class Customer extends javax.swing.JFrame {
         );
 
         pack();
-    }                        
+        setLocationRelativeTo(null);
+    }// </editor-fold>                        
 
     private void btnViewRoomActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
