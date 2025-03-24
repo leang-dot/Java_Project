@@ -247,6 +247,8 @@ public class SignUp extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, e);
             }
             JOptionPane.showMessageDialog(this, "Sign up successfully");
+            Login.main(null);
+            this.dispose();
         } // if the password and cornfirm password are not the same
         else if(password.equals("") || cornfirmPassword.equals("")){
             JOptionPane.showMessageDialog(this, "Please enter password and cornfirm password");

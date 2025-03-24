@@ -1,17 +1,12 @@
 package GUI;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import DataBase.DatabaseConnection;
-
 public class MainForm extends javax.swing.JFrame {
 
     public MainForm() {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    @SuppressWarnings("unchecked")                      
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -23,11 +18,6 @@ public class MainForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -75,24 +65,24 @@ public class MainForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jButton1)
-                .addGap(58, 58, 58)
-                .addComponent(jButton2)
+                .addGap(44, 44, 44)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(68, 68, 68)
                 .addComponent(jButton3)
-                .addGap(50, 50, 50))
+                .addGap(36, 36, 36))
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -155,19 +145,7 @@ public class MainForm extends javax.swing.JFrame {
         EmployeeLogin.main(null);
         this.dispose();
     }                                        
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
-    try (Connection connection = DatabaseConnection.getConnection()) {
-        if (connection != null) {
-            System.out.println("Database connection successful!");
-        } else {
-            System.out.println("Failed to make connection!");
-        }
-    } catch (SQLException e) {
-        System.err.println("Connection error: " + e.getMessage());
-        e.printStackTrace();
-    }
-}                                 
+                                
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

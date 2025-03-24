@@ -157,6 +157,12 @@ public class Login extends javax.swing.JFrame {
         String username = txtEmail.getText();
         String password = String.valueOf(txtPassword.getPassword());
         System.out.println(username + " " +  password);
+
+        // check data frome table Customer in database
+        if((username.equals(password))){
+
+        }
+        
         
     }                                        
 
