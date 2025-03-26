@@ -18,7 +18,7 @@ public class Customer extends javax.swing.JFrame {
 
         public Customer(String firstname, String lastname, String email) { // Constructor for login
                 initComponents();
-                jLabel1.setText("<html>Welcome,<br>" + firstname + " " + lastname + "</html>");
+                jLabel1.setText("<html>Welcome <br>" + firstname + " " + lastname + "</html>");
                 jLabel7.setText("Email: " + email);
                 loadRoomData();
         }
