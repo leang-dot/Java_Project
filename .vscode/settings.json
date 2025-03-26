@@ -1,4 +1,5 @@
 {
   "java.project.referencedLibraries": ["c:\\mysql-connector-j-9.2.0.jar"],
-  "java.project.sourcePaths": ["GUIhotelmanagement\\src"]
+  "java.project.sourcePaths": ["GUIhotelmanagement\\src"],
+  "java.debug.settings.onBuildFailureProceed": true
 }

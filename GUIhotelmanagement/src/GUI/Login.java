@@ -9,7 +9,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
-                        
+
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -87,87 +87,97 @@ public class Login extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnLogin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
-                        .addComponent(btnSignUp))
-                    .addComponent(txtEmail)
-                    .addComponent(txtPassword))
-                .addContainerGap(78, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(214, 214, 214))))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btnLogin)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        186, Short.MAX_VALUE)
+                                                .addComponent(btnSignUp))
+                                        .addComponent(txtEmail)
+                                        .addComponent(txtPassword))
+                                .addContainerGap(78, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(btnBack)
+                                                        .addGap(17, 17, 17))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(jLabel1)
+                                                        .addGap(214, 214, 214)))));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnBack)
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(btnSignUp))
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBack)
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnLogin)
+                                        .addComponent(btnSignUp))
+                                .addContainerGap(57, Short.MAX_VALUE)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         setSize(new java.awt.Dimension(576, 309));
         setLocationRelativeTo(null);
-    }// </editor-fold>                        
+    }// </editor-fold>
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                        
+    }
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         String email = txtEmail.getText();
         String password = String.valueOf(txtPassword.getPassword());
-        System.out.println(email + " " +  password);
+        System.out.println(email + " " + password);
 
         // check data frome table Customer in database
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT email, password FROM Customer WHERE email = ? AND password = ?")) {
+                PreparedStatement ps = conn
+                        .prepareStatement(
+                                "SELECT email, password, first_name, last_name FROM Customer WHERE email = ? AND password = ?")) {
             ps.setString(1, email);
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    String firstname = rs.getString("first_name");
+                    String lastname = rs.getString("last_name");
+                    String mail = rs.getString("email");
                     JOptionPane.showMessageDialog(this, "Login Successfully!");
-                    Customer.main(null);
+                    new Customer(firstname, lastname, email).setVisible(true);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Email or Password!");
@@ -176,28 +186,28 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
-        
-    }                                        
 
-    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    }
+
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         SignUp.main(null);
         this.dispose();
-    }                                         
+    }
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {
         // TODO add your handling code here:
-    }                                 
+    }
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         MainForm.main(null);
         this.dispose();
-    }                                       
+    }
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                           
+    }
 
     public static void main(String args[]) {
 
@@ -206,7 +216,7 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSignUp;
@@ -216,5 +226,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
-    // End of variables declaration                   
+    // End of variables declaration
 }

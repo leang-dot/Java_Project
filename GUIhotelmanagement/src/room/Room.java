@@ -14,82 +14,82 @@ public class Room {
 
     public Room(String roomNumber, String roomType, double price, int floor, String viewType, boolean hasBalcony,
             String[] roomFacilities) {
-                this.roomNumber = roomNumber;
-                this.roomType = roomType;
-                this.price = price;
-                this.isBooked = false;
-                this.floor = floor;
-                this.viewType = viewType;
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.price = price;
+        this.isBooked = false;
+        this.floor = floor;
+        this.viewType = viewType;
         this.hasBalcony = hasBalcony;
         this.roomFacilities = roomFacilities != null ? roomFacilities : new String[0];
     }
-    
+
     public String getRoomNumber() {
         return roomNumber;
     }
-    
+
     public void setRoomNumber(String roomNumber) {
         if (roomNumber != null && !roomNumber.trim().isEmpty())
-        this.roomNumber = roomNumber;
+            this.roomNumber = roomNumber;
     }
 
     public String getRoomType() {
         return roomType;
     }
-    
+
     public void setRoomType(String roomType) {
         this.roomType = roomType;
     }
-    
+
     public double getPrice() {
         return price;
     }
-    
+
     public void setPrice(double price) {
         if (price >= 0)
-        this.price = price;
+            this.price = price;
     }
-    
+
     public boolean isBooked() {
         return isBooked;
     }
-    
+
     public void setBooked(boolean booked) {
         this.isBooked = booked;
     }
-    
+
     public int getFloor() {
         return floor;
     }
-    
+
     public void setFloor(int floor) {
         this.floor = floor;
     }
-    
+
     public String getViewType() {
         return viewType;
     }
-    
+
     public void setViewType(String viewType) {
         this.viewType = viewType;
     }
-    
+
     public boolean isHasBalcony() {
         return hasBalcony;
     }
-    
+
     public void setHasBalcony(boolean hasBalcony) {
         this.hasBalcony = hasBalcony;
     }
-    
+
     public String[] getRoomFacilities() {
         return roomFacilities;
     }
-    
+
     public void setRoomFacilities(String[] roomFacilities) {
         this.roomFacilities = roomFacilities != null ? roomFacilities : new String[0];
     }
-    
+
     // Utility Methods
     public void addFacility(String facility) {
         if (facility != null && !facility.trim().isEmpty() && !Arrays.asList(roomFacilities).contains(facility)) {
@@ -98,7 +98,7 @@ public class Room {
             roomFacilities = newFacilities;
         }
     }
-    
+
     public void removeFacility(String facility) {
         if (facility != null) {
             int index = Arrays.asList(roomFacilities).indexOf(facility);
@@ -110,20 +110,20 @@ public class Room {
             }
         }
     }
-    
+
     public void resetBookingStatus() {
         isBooked = false;
         System.out.println("Room " + roomNumber + " booking status reset.");
     }
-    
+
     @Override
     public String toString() {
         return "Room " + roomNumber + " (" + roomType + ") - $" + price + " [Floor: " + floor + ", View: " + viewType +
-        ", Balcony: " + hasBalcony + ", Booked: " + isBooked + ", Facilities: "
-        + Arrays.toString(roomFacilities) + "]";
+                ", Balcony: " + hasBalcony + ", Booked: " + isBooked + ", Facilities: "
+                + Arrays.toString(roomFacilities) + "]";
     }
 }
 // if (roomNumber == null || roomNumber.trim().isEmpty())
-//     throw new IllegalArgumentException("Room number cannot be null or empty.");
+// throw new IllegalArgumentException("Room number cannot be null or empty.");
 // if (price < 0)
-//     throw new IllegalArgumentException("Price cannot be negative.");
+// throw new IllegalArgumentException("Price cannot be negative.");
