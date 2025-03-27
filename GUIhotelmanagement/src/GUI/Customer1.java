@@ -1,6 +1,5 @@
-package DataBase;
+package GUI;
 
-import GUI.*;
 import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JComponent;
