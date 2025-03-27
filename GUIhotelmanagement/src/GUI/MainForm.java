@@ -130,7 +130,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        Login1.main(null);
+        Login.main(null);
         this.dispose();
     }                                        
 
