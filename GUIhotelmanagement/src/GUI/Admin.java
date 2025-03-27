@@ -7,15 +7,12 @@ public class Admin extends javax.swing.JFrame {
 
     public Admin() {
         initComponents();
-        // Set the initial hint text and color for txtSearch
         txtSearch.setText("");
         txtSearch.setForeground(Color.GRAY);
         setForm(new CrudEmployee());
         
     }
-
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                    
     private void initComponents() {
 
         menu = new GUI.Menu();
