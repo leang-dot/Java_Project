@@ -1,10 +1,7 @@
 
 package GUI;
 
-/**
- *
- * @author USER
- */
+
 public class CrudRoom extends javax.swing.JPanel {
 
     public CrudRoom() {

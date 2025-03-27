@@ -1,5 +1,15 @@
 package GUI;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import DataBase.DatabaseConnection;
+
 public class Booking_History extends javax.swing.JPanel {
 
     public Booking_History() {
@@ -52,9 +62,34 @@ public class Booking_History extends javax.swing.JPanel {
         );
     }
 
+    public void loadRoomData() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new String[] { "Room Type", "Room Price", "Availability" });
 
-    // Variables declaration - do not modify
+        String sql = "SELECT booking_date, room_type, total_price FROM booking_history WHERE customer_id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                model.addRow(new Object[] {
+                        rs.getString("booking_date"),
+                        rs.getString("room_type"),
+                        rs.getDouble("total_price")
+                });
+            }
+
+            jTable1.setModel(model);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error loading booking history: " + e.getMessage());
+        }
+
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    // End of variables declaration
+    // End of variables declaration//GEN-END:variables
 }
