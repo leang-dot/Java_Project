@@ -152,23 +152,23 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {
+        
     }
 
-    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSignUpActionPerformed
-        // TODO add your handling code here:
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {
+        
         SignUp.main(null);
         this.dispose();
 
-    }// GEN-LAST:event_btnSignUpActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
-        // TODO add your handling code here:
     }
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+        
+    }
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
+        
         String email = txtEmail.getText();
         String password = String.valueOf(txtPassword.getPassword());
         System.out.println(email + " " + password);
@@ -217,7 +217,7 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JLabel Email;
     private javax.swing.JPanel Main;
     private javax.swing.JLabel Password;
@@ -227,5 +227,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
-    // End of variables declaration//GEN-END:variables
+    
 }
