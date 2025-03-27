@@ -16,7 +16,7 @@ public class Admin extends javax.swing.JFrame {
 
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         menu = new GUI.Menu();
@@ -235,19 +235,19 @@ public class Admin extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         MainForm.main(null);
         
-    }//GEN-LAST:event_btnLogOutActionPerformed
+    }                                         
 
-    private void menuListComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_menuListComponentAdded
+    private void menuListComponentAdded(java.awt.event.ContainerEvent evt) {                                        
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuListComponentAdded
+    }                                       
 
-    private void menuListMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuListMouseMoved
+    private void menuListMouseMoved(java.awt.event.MouseEvent evt) {                                    
         // TODO add your handling code here:
         // Get the index of the item under the mouse cursor
         Point point = evt.getPoint();
@@ -261,9 +261,9 @@ public class Admin extends javax.swing.JFrame {
             menuList.clearSelection();
         }
         
-    }//GEN-LAST:event_menuListMouseMoved
+    }                                   
 
-    private void menuListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuListMouseClicked
+    private void menuListMouseClicked(java.awt.event.MouseEvent evt) {                                      
          // Get the index of the clicked item
         int index = menuList.locationToIndex(evt.getPoint());
         
@@ -282,7 +282,7 @@ public class Admin extends javax.swing.JFrame {
                     break;
             }
         }
-    }//GEN-LAST:event_menuListMouseClicked
+    }                                     
 
     private void setForm(JComponent com){
         mainPanel.removeAll();
@@ -291,11 +291,11 @@ public class Admin extends javax.swing.JFrame {
         mainPanel.revalidate();
     }
     private boolean isPlaceholder = true;
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
+    }                                         
 
-    private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost
+    private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {                                    
         // TODO add your handling code here:
         if (txtSearch.getText().trim().isEmpty()) {
         txtSearch.setText("Search here...");
@@ -304,16 +304,16 @@ public class Admin extends javax.swing.JFrame {
     } else {
         isPlaceholder = false;
     }
-    }//GEN-LAST:event_txtSearchFocusLost
+    }                                   
 
-    private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusGained
+    private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {                                      
         // TODO add your handling code here:
         if (isPlaceholder && txtSearch.getText().trim().equalsIgnoreCase("Search here...")) {
         txtSearch.setText("");
         txtSearch.setForeground(Color.BLACK);
         isPlaceholder = false;
     }
-    }//GEN-LAST:event_txtSearchFocusGained
+    }                                     
 
     
     public static void main(String args[]) {
@@ -325,7 +325,7 @@ public class Admin extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnLogOut;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -341,5 +341,5 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JList<String> menuList;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JLabel userIcon;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
