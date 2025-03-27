@@ -240,6 +240,7 @@ public class Customer1 extends javax.swing.JFrame {
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
         // TODO add your handling code here:
         MainForm.main(null);
+        this.dispose();
         
     }//GEN-LAST:event_btnLogOutActionPerformed
 
