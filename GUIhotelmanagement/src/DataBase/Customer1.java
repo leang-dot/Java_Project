@@ -1,16 +1,17 @@
-package GUI;
+package DataBase;
 
+import GUI.*;
 import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JComponent;
-public class Employee extends javax.swing.JFrame {
+public class Customer1 extends javax.swing.JFrame {
 
-    public Employee() {
+    public Customer1() {
         initComponents();
         // Set the initial hint text and color for txtSearch
         txtSearch.setText("");
         txtSearch.setForeground(Color.GRAY);
-        setForm(new CrudEmployee());
+        setForm(new CrudBooking());
         
     }
 
@@ -61,7 +62,7 @@ public class Employee extends javax.swing.JFrame {
         menuList.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         menuList.setForeground(new java.awt.Color(245, 238, 220));
         menuList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Check In", "Check Out", "Customer Info" };
+            String[] strings = { "Booking", "View Room" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -90,7 +91,7 @@ public class Employee extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(245, 238, 220));
-        jLabel1.setText("Employee");
+        jLabel1.setText("Customer");
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
@@ -271,14 +272,11 @@ public class Employee extends javax.swing.JFrame {
         if (index >= 0 && menuList.getCellBounds(index, index).contains(evt.getPoint())) {
             String selectedItem = menuList.getModel().getElementAt(index);
             switch (selectedItem) {
-                 case "Check In":
-                    setForm(new CrudCheckIn());
+                 case "Booking":
+                    setForm(new CrudBooking());
                     break;
-                case "Check Out":
-                    setForm(new CrudCheckOut());
-                    break;
-                case "Customer Info":
-                    setForm(new CrudCustomerInfo());
+                case "View Room":
+                    setForm(new CrudViewRoom());
                     break;
             }
         }
@@ -297,10 +295,11 @@ public class Employee extends javax.swing.JFrame {
 
     private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost
         // TODO add your handling code here:
+        isPlaceholder = true;
         if (txtSearch.getText().trim().isEmpty()) {
         txtSearch.setText("Search here...");
         txtSearch.setForeground(Color.GRAY);
-        isPlaceholder = true;
+        
     } else {
         isPlaceholder = false;
     }
@@ -320,7 +319,7 @@ public class Employee extends javax.swing.JFrame {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Employee().setVisible(true);
+                new Customer1().setVisible(true);
             }
         });
     }
