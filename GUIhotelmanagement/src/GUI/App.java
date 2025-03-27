@@ -12,9 +12,7 @@ public class App {
                 formWindowOpened(evt);
             }
         });
-        mainForm.setVisible(true);
-
-        
+        mainForm.setVisible(true);     
     }
 
     private static void formWindowOpened(java.awt.event.WindowEvent evt) {

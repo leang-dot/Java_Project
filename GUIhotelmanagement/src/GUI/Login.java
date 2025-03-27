@@ -175,7 +175,6 @@ public class Login extends javax.swing.JFrame {
                 if (rs.next()) {
                     String firstname = rs.getString("first_name");
                     String lastname = rs.getString("last_name");
-                    String mail = rs.getString("email");
                     JOptionPane.showMessageDialog(this, "Login Successfully!");
                     new Customer(firstname, lastname, email).setVisible(true);
                     this.dispose();
