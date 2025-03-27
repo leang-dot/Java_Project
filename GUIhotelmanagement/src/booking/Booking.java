@@ -12,8 +12,6 @@ public class Booking extends Room {
     private String customerName;
     private String customerPhoneNumber;
     private String customerEmail;
-    private String customerCity;
-    private String customerCountry;
 
     public Booking(String bookingDate, String checkIn, String checkOut, String roomNumber, String roomType,
             double price, int floor, String viewType, boolean hasBalcony, String[] roomFacilities, double totalPrice,
@@ -32,8 +30,6 @@ public class Booking extends Room {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerEmail = customerEmail;
-        this.customerCity = customerCity;
-        this.customerCountry = customerCountry;
         setBooked(true);
     }
 
