@@ -100,23 +100,7 @@ public class Booking extends Room {
         this.customerEmail = customerEmail;
     }
 
-    public String getCustomerCity() {
-        return customerCity;
-    }
 
-    public void setCustomerCity(String customerCity) {
-        this.customerCity = customerCity;
-    }
-
-    public String getCustomerCountry() {
-        return customerCountry;
-    }
-
-    public void setCustomerCountry(String customerCountry) {
-        this.customerCountry = customerCountry;
-    }
-
-    // Utility Methods
     public void cancelBooking() {
         setBooked(false);
         System.out.println("Booking " + bookingId + " cancelled for " + customerName);
