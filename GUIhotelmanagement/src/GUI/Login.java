@@ -1,6 +1,4 @@
-
 package GUI;
-
 import DataBase.DatabaseConnection;
 import java.sql.*;
 import javax.swing.*;
