@@ -7,13 +7,14 @@ public class Employee extends javax.swing.JFrame {
 
     public Employee() {
         initComponents();
-        txtSearch.setText("");
-        txtSearch.setForeground(Color.GRAY);
-        setForm(new CrudEmployee());
+        // Set the initial hint text and color for txtSearch
+        setForm(new CrudCustomer());
         
     }
 
 
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         menu = new GUI.Menu();
@@ -27,9 +28,7 @@ public class Employee extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,7 +57,7 @@ public class Employee extends javax.swing.JFrame {
         menuList.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         menuList.setForeground(new java.awt.Color(245, 238, 220));
         menuList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Check In", "Check Out", "Customer Info" };
+            String[] strings = { "Customer", "Booking Confirm" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -94,7 +93,9 @@ public class Employee extends javax.swing.JFrame {
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addGap(295, 295, 295)
+                .addGap(10, 10, 10)
+                .addComponent(btnLogOut)
+                .addGap(219, 219, 219)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4))
@@ -110,10 +111,7 @@ public class Employee extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
-                    .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(menuLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnLogOut)))
+                    .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
@@ -131,14 +129,14 @@ public class Employee extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel2))
                 .addGap(0, 0, 0)
-                .addComponent(menuList, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(menuList, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3))
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addComponent(btnLogOut)
-                .addContainerGap())
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -154,50 +152,25 @@ public class Employee extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search1.png"))); // NOI18N
-        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/menu.png"))); // NOI18N
-
-        txtSearch.setActionCommand("");
-        txtSearch.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtSearch.setOpaque(true);
-        txtSearch.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtSearchFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtSearchFocusLost(evt);
-            }
-        });
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(245, 238, 220));
+        jLabel8.setText("Employee");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(363, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(240, 240, 240))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(4, 4, 4))
-            .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         mainPanel.setOpaque(false);
@@ -232,19 +205,21 @@ public class Employee extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    }
+    }// </editor-fold>                        
 
-    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {
-        Login.main(null);
-        this.dispose();        
-    }
-                      
-    private void menuListComponentAdded(java.awt.event.ContainerEvent evt) {                                      
-                                 
-    }
+    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        EmployeeLogin.main(null);
+        
+    }                                         
 
-    private void menuListMouseMoved(java.awt.event.MouseEvent evt) { 
+    private void menuListComponentAdded(java.awt.event.ContainerEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
 
+    private void menuListMouseMoved(java.awt.event.MouseEvent evt) {                                    
+        // TODO add your handling code here:
+        // Get the index of the item under the mouse cursor
         Point point = evt.getPoint();
         int index = menuList.locationToIndex(point);
         
@@ -252,12 +227,13 @@ public class Employee extends javax.swing.JFrame {
         if (index >= 0 && menuList.getCellBounds(index, index).contains(point)) {
             menuList.setSelectedIndex(index);
         } else {
+            // Clear selection if the mouse is not over any item
             menuList.clearSelection();
         }
         
-    }
+    }                                   
 
-    private void menuListMouseClicked(java.awt.event.MouseEvent evt) {
+    private void menuListMouseClicked(java.awt.event.MouseEvent evt) {                                      
          // Get the index of the clicked item
         int index = menuList.locationToIndex(evt.getPoint());
         
@@ -265,18 +241,15 @@ public class Employee extends javax.swing.JFrame {
         if (index >= 0 && menuList.getCellBounds(index, index).contains(evt.getPoint())) {
             String selectedItem = menuList.getModel().getElementAt(index);
             switch (selectedItem) {
-                 case "Check In":
-                    setForm(new CrudCheckIn());
+                case "Customer":
+                    setForm(new CrudCustomer());
                     break;
-                case "Check Out":
-                    setForm(new CrudCheckOut());
-                    break;
-                case "Customer Info":
-                    setForm(new CrudCustomerInfo());
+                case "Booking Confirm":
+                    setForm(new BookingConfirm());
                     break;
             }
         }
-    }
+    }                                     
 
     private void setForm(JComponent com){
         mainPanel.removeAll();
@@ -284,29 +257,6 @@ public class Employee extends javax.swing.JFrame {
         mainPanel.repaint();
         mainPanel.revalidate();
     }
-    private boolean isPlaceholder = true;
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {
-        
-    }
-
-    private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {
-        if (txtSearch.getText().trim().isEmpty()) {
-        txtSearch.setText("Search here...");
-        txtSearch.setForeground(Color.GRAY);
-        isPlaceholder = true;
-    } else {
-        isPlaceholder = false;
-    }
-    }
-
-    private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusGained
-        if (isPlaceholder && txtSearch.getText().trim().equalsIgnoreCase("Search here...")) {
-        txtSearch.setText("");
-        txtSearch.setForeground(Color.BLACK);
-        isPlaceholder = false;
-    }
-    }
-
     
     public static void main(String args[]) {
        
@@ -317,19 +267,19 @@ public class Employee extends javax.swing.JFrame {
         });
     }
 
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnLogOut;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel mainPanel;
     private GUI.Menu menu;
     private javax.swing.JList<String> menuList;
-    private javax.swing.JTextField txtSearch;
     private javax.swing.JLabel userIcon;
+    // End of variables declaration                   
 }
