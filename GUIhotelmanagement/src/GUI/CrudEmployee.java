@@ -15,7 +15,7 @@ public class CrudEmployee extends javax.swing.JPanel {
     String password;
     String employeeRole;
     String salary;
-    private int selectedEmployeeId = -1; // To track selected employee
+    private int selectedEmployeeId = -1; 
     public CrudEmployee() {
         initComponents();
         loadEmployeeData();
@@ -75,9 +75,7 @@ public class CrudEmployee extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error loading employee data: " + e.getMessage());
         }
     }
-
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                        
     private void initComponents() {
 
         jLabel8 = new javax.swing.JLabel();
@@ -312,14 +310,12 @@ public class CrudEmployee extends javax.swing.JPanel {
     }// </editor-fold>                        
 
     private void txtSalaryActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
     }                                         
 
     private void cmbEmployeeRoleActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
     }                                               
 
-    private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
+    private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {
         firstName = txtFirstName.getText();
         if (!firstName.matches("[a-zA-Z]+")) {
             JOptionPane.showMessageDialog(this, "First name can only contain letters");
@@ -383,23 +379,17 @@ public class CrudEmployee extends javax.swing.JPanel {
     }                                             
 
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
     }                                            
 
     private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
     }                                           
 
     private void txtPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
     }                                              
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {    }                                        
 
     private void btnUpdateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
         if (selectedEmployeeId == -1) {
             JOptionPane.showMessageDialog(this, "Please select an employee from the table or search for an employee first");
             return;
@@ -465,7 +455,6 @@ public class CrudEmployee extends javax.swing.JPanel {
     }                                                 
 
     private void btnDeleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
         if (selectedEmployeeId == -1) {
             JOptionPane.showMessageDialog(this, "Please select an employee from the table or search for an employee first");
             return;
@@ -501,11 +490,10 @@ public class CrudEmployee extends javax.swing.JPanel {
     }                                                 
 
     private void txtSearchIdActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+    
     }                                           
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
         String searchId = txtSearchId.getText().trim();
         if (searchId.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an Employee ID to search");
@@ -557,8 +545,7 @@ public class CrudEmployee extends javax.swing.JPanel {
         }
     }                                         
 
-
-    // Variables declaration - do not modify                     
+                 
     private javax.swing.JButton btnAddEmployee;
     private javax.swing.JButton btnDeleteEmployee;
     private javax.swing.JButton btnSearch;
@@ -579,6 +566,5 @@ public class CrudEmployee extends javax.swing.JPanel {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtSalary;
-    private javax.swing.JTextField txtSearchId;
-    // End of variables declaration                   
+    private javax.swing.JTextField txtSearchId;                
 }

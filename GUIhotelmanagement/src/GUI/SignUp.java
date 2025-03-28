@@ -234,55 +234,42 @@ public class SignUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    private void txtFirstnameActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtFirstnameActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtFirstnameActionPerformed
-
-    private void txtLastnameActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtLastnameActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtLastnameActionPerformed
-
-    private void txtConfirmpasswordActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtConfirmpasswordActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtConfirmpasswordActionPerformed
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        Login.main(null);
-        this.dispose();
-    }// GEN-LAST:event_btnLoginActionPerformed
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
+    private void txtFirstnameActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
-    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSignUpActionPerformed
-        // TODO add your handling code here:
+    private void txtLastnameActionPerformed(java.awt.event.ActionEvent evt) {
+       
+    }
+
+    private void txtConfirmpasswordActionPerformed(java.awt.event.ActionEvent evt) {
+        
+    }
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
+        Login.main(null);
+        this.dispose();
+    }
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {
         String firstName = txtFirstname.getText();
-        // for the first name only text is allowed
         if (!firstName.matches("[a-zA-Z]+")) {
             JOptionPane.showMessageDialog(this, "First name can only contain letters");
             return;
         }
 
         String lastName = txtLastname.getText();
-        // for the last name only text is allowed
         if (!lastName.matches("[a-zA-Z]+")) {
             JOptionPane.showMessageDialog(this, "Last name can only contain letters");
             return;
         }
 
-        // String phoneNumber = txtPhoneNumber.getText();
-        // // for the phone number only numbers are allowed
-        // if(!phoneNumber.matches("[0-9]+")) {
-        // JOptionPane.showMessageDialog(this, "Phone number can only contain numbers");
-        // return;
-        // }
 
         String phoneNumber = "123455";
 
         String email = txtEmail.getText();
-        // for the email has @ and .
         if (!email.matches("^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$")) {
             JOptionPane.showMessageDialog(this, "Invalid email");
             return;
@@ -291,7 +278,6 @@ public class SignUp extends javax.swing.JFrame {
         String password = String.valueOf(txtPassword.getPassword());
         String confirmpassword = String.valueOf(txtConfirmpassword.getPassword());
 
-        // if the password and cornfirm password are the same
         if (password.equals(confirmpassword)) {
             try (Connection conn = DatabaseConnection.getConnection()) {
 
@@ -306,11 +292,10 @@ public class SignUp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sign up successfully");
             Login.main(null);
             this.dispose();
-        } // if the password and cornfirm password are not the same
+        } 
         else if (password.equals("") || confirmpassword.equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter password and cornfirm password");
         } else {
-            // if anything else is wrong
             JOptionPane.showMessageDialog(this, "anything else is wrong");
 
         }
@@ -336,7 +321,6 @@ public class SignUp extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Email;
     private javax.swing.JLabel Firstname;
     private javax.swing.JLabel Lastname;
@@ -352,5 +336,4 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField txtFirstname;
     private javax.swing.JTextField txtLastname;
     private javax.swing.JPasswordField txtPassword;
-    // End of variables declaration//GEN-END:variables
 }

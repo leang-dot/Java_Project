@@ -1,21 +1,14 @@
 
 package GUI;
-
 import DataBase.DatabaseConnection;
 import java.sql.*;
 import javax.swing.*;
 public class EmployeeLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CustomerSIgnUP
-     */
     public EmployeeLogin() {
         initComponents();
     }
 
-    
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         Main = new javax.swing.JPanel();
@@ -130,14 +123,14 @@ public class EmployeeLogin extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {
+       
+    };
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
         String email = txtEmail.getText();
         String password = String.valueOf(txtPassword.getPassword());
         System.out.println(email + " " + password);
@@ -167,8 +160,7 @@ public class EmployeeLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnLoginActionPerformed
-
+    }
     
     public static void main(String args[]) {
         
@@ -176,8 +168,7 @@ public class EmployeeLogin extends javax.swing.JFrame {
             new EmployeeLogin().setVisible(true);
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JLabel Email;
     private javax.swing.JPanel Main;
     private javax.swing.JLabel Password;
@@ -186,5 +177,4 @@ public class EmployeeLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
-    // End of variables declaration//GEN-END:variables
 }
