@@ -31,10 +31,10 @@ public class CrudRoom extends javax.swing.JPanel {
         txtAvailability.setText("");
         txtSearchId.setText("");
     }
-    
+
     private void loadRoomData() {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "SELECT room_id, room_type, price, availability FROM rooms";
+            String query = "SELECT room_id, room_type, price, availability FROM room";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
 
@@ -253,7 +253,7 @@ public class CrudRoom extends javax.swing.JPanel {
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "INSERT INTO rooms (room_type, price, availability) VALUES (?, ?, ?)";
+            String query = "INSERT INTO room (room_type, price, availability) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, roomType);
             pstmt.setDouble(2, Double.parseDouble(price));
@@ -317,7 +317,7 @@ public class CrudRoom extends javax.swing.JPanel {
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "UPDATE rooms SET room_type = ?, price = ?, availability = ? WHERE room_id = ?";
+            String query = "UPDATE room SET room_type = ?, price = ?, availability = ? WHERE room_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, roomType);
             pstmt.setDouble(2, Double.parseDouble(price));
@@ -353,7 +353,7 @@ public class CrudRoom extends javax.swing.JPanel {
 
         if (confirm == JOptionPane.YES_OPTION) {
             try (Connection conn = DatabaseConnection.getConnection()) {
-                String query = "DELETE FROM rooms WHERE room_id = ?";
+                String query = "DELETE FROM room WHERE room_id = ?";
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 pstmt.setInt(1, selectedRoomId);
 
@@ -387,7 +387,7 @@ public class CrudRoom extends javax.swing.JPanel {
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "SELECT room_id, room_type, price, availability FROM rooms WHERE room_id = ?";
+            String query = "SELECT room_id, room_type, price, availability FROM room WHERE room_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, Integer.parseInt(searchId));
             ResultSet rs = pstmt.executeQuery();
