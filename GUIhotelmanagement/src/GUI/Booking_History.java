@@ -11,29 +11,39 @@ import javax.swing.table.DefaultTableModel;
 import DataBase.DatabaseConnection;
 
 public class Booking_History extends javax.swing.JPanel {
+        private int customerId; // Store the customer's ID
 
-    public Booking_History() {
-        initComponents();
-        loadBookingData();
-    }
+        // Modified constructor to accept customerId
+        public Booking_History(int customerId) {
+            this.customerId = customerId; // Assign the passed customerId
+            initComponents();
+            loadBookingData();
+        }
 
     private void loadBookingData() {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "SELECT booking_date, room_type, total_price FROM booking ORDER BY booking_date ASC";
+            // Modified query to filter by customer_id
+            String query = "SELECT booking_date, room_type, total_price " +
+                          "FROM bookings " +
+                          "WHERE customer_id = ? " +
+                          "ORDER BY booking_date ASC";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, customerId); // Set the customer ID parameter
+
             ResultSet rs = pstmt.executeQuery();
 
             // Create a new table model
             DefaultTableModel model = new DefaultTableModel(
-                    new Object[][] {},
-                    new String[] { "Booking Date", "Room Type", "Total Price" });
+                new Object[][]{},
+                new String[]{"Booking Date", "Room Type", "Total Price"}
+            );
 
             // Populate the model with data
             while (rs.next()) {
-                model.addRow(new Object[] {
-                        rs.getDate("booking_date"), // Assuming booking_date is a DATE type
-                        rs.getString("room_type"),
-                        rs.getDouble("total_price")
+                model.addRow(new Object[]{
+                    rs.getDate("booking_date"),    // DATE type
+                    rs.getString("room_type"),
+                    rs.getDouble("total_price")
                 });
             }
 
@@ -41,7 +51,7 @@ public class Booking_History extends javax.swing.JPanel {
             jTable1.setModel(model);
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error loading booking history: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error loading your booking history: " + e.getMessage());
         }
     }
 
