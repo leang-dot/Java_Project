@@ -19,22 +19,21 @@ public class Booking_History extends javax.swing.JPanel {
 
     private void loadBookingData() {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "SELECT booking_date, room_type, total_price FROM booking";
+            String query = "SELECT booking_date, room_type, total_price FROM booking ORDER BY booking_date ASC";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
 
             // Create a new table model
             DefaultTableModel model = new DefaultTableModel(
-                new Object[][]{},
-                new String[]{"Booking Date", "Room Type", "Total Price"}
-            );
+                    new Object[][] {},
+                    new String[] { "Booking Date", "Room Type", "Total Price" });
 
             // Populate the model with data
             while (rs.next()) {
-                model.addRow(new Object[]{
-                    rs.getDate("booking_date"),    // Assuming booking_date is a DATE type
-                    rs.getString("room_type"),
-                    rs.getDouble("total_price")
+                model.addRow(new Object[] {
+                        rs.getDate("booking_date"), // Assuming booking_date is a DATE type
+                        rs.getString("room_type"),
+                        rs.getDouble("total_price")
                 });
             }
 
@@ -54,22 +53,21 @@ public class Booking_History extends javax.swing.JPanel {
         setBackground(new java.awt.Color(245, 238, 220));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Booking Date", "Room Type", "Total Price"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                new Object[][] {
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null }
+                },
+                new String[] {
+                        "Booking Date", "Room Type", "Total Price"
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -77,22 +75,20 @@ public class Booking_History extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(36, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(32, Short.MAX_VALUE)));
     }
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

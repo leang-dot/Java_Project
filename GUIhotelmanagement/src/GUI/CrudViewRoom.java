@@ -202,34 +202,6 @@ public class CrudViewRoom extends javax.swing.JPanel {
         }
     }
 
-    public void countRoomBookingsByDate(String bookingDate) {
-        String sql = "SELECT room.room_type, COUNT(*) AS total_bookings " +
-                "FROM booking " +
-                "JOIN room ON booking.room_id = room.room_id " +
-                "WHERE booking.booking_date = ? " +
-                "GROUP BY room.room_type";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, bookingDate); // Pass selected date
-            ResultSet rs = ps.executeQuery();
-
-            System.out.println("Room Type | Total Bookings");
-            System.out.println("--------------------------");
-
-            while (rs.next()) {
-                String roomType = rs.getString("room_type");
-                int totalBookings = rs.getInt("total_bookings");
-
-                System.out.println(roomType + " | " + totalBookings);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error loading bookings: " + e.getMessage());
-        }
-    }
-
     private int showBookingDetails(String roomType, String userName, String userEmail, String bookingDate) {
         // Create the message for the booking details popup
         String message = "Room: " + roomType + "\n"
@@ -277,10 +249,9 @@ public class CrudViewRoom extends javax.swing.JPanel {
         model.setColumnIdentifiers(new String[] { "Room Type", "Room Price", "Availability" });
 
         String sql = "SELECT r.room_type, r.price, (r.availability - " +
-                "(SELECT COUNT(*) FROM booking WHERE booking_date = ? AND room_id = r.room_id)) AS available_rooms "
+                "(SELECT COUNT(*) FROM booking WHERE booking_date = ? AND room_type = r.room_type)) AS available_rooms "
                 +
                 "FROM room r";
-
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
