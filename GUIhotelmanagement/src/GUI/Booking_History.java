@@ -14,6 +14,36 @@ public class Booking_History extends javax.swing.JPanel {
 
     public Booking_History() {
         initComponents();
+        loadBookingData();
+    }
+
+    private void loadBookingData() {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String query = "SELECT booking_date, room_type, total_price FROM booking";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            // Create a new table model
+            DefaultTableModel model = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"Booking Date", "Room Type", "Total Price"}
+            );
+
+            // Populate the model with data
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getDate("booking_date"),    // Assuming booking_date is a DATE type
+                    rs.getString("room_type"),
+                    rs.getDouble("total_price")
+                });
+            }
+
+            // Set the model to the table
+            jTable1.setModel(model);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error loading booking history: " + e.getMessage());
+        }
     }
 
     private void initComponents() {
@@ -62,31 +92,7 @@ public class Booking_History extends javax.swing.JPanel {
         );
     }
 
-    public void loadRoomData() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new String[] { "Room Type", "Room Price", "Availability" });
-
-        String sql = "SELECT booking_date, room_type, total_price FROM booking_history WHERE customer_id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                model.addRow(new Object[] {
-                        rs.getString("booking_date"),
-                        rs.getString("room_type"),
-                        rs.getDouble("total_price")
-                });
-            }
-
-            jTable1.setModel(model);
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error loading booking history: " + e.getMessage());
-        }
-
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

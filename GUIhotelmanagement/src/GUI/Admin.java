@@ -235,7 +235,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-        MainForm.main(null);
+        EmployeeLogin.main(null);
         this.dispose();
         
     }                                         

@@ -255,7 +255,7 @@ public class Customer extends javax.swing.JFrame {
     }
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {
-        MainForm.main(null);
+        Login.main(null);
         this.dispose();
 
     }

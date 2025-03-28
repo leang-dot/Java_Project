@@ -6,13 +6,13 @@ import DataBase.DatabaseConnection; // Add this import statement
 
 public class App {
     public static void main(String[] args) {
-        MainForm mainForm = new MainForm();
-        mainForm.addWindowListener(new java.awt.event.WindowAdapter() {
+        Admin Admin = new Admin();
+        Admin.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
-        mainForm.setVisible(true);     
+        Admin.setVisible(true);     
     }
 
     private static void formWindowOpened(java.awt.event.WindowEvent evt) {
