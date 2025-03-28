@@ -287,7 +287,7 @@ public class Customer extends javax.swing.JFrame {
                         String selectedItem = menuList.getModel().getElementAt(index);
                         switch (selectedItem) {
                                 case "Booking History":
-                                        setForm(new Booking_History());
+                                        setForm(new Booking_History(customerId));
                                         break;
                                 case "View Room":
                                         setForm(new CrudViewRoom(firstname, lastname, customerId, email));
