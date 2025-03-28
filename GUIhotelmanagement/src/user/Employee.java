@@ -30,10 +30,6 @@ public class Employee extends User {
         return salary;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
     public String getDateOfBirth() {
         return dateOfBirth;
     }
@@ -42,11 +38,4 @@ public class Employee extends User {
         return hireDate;
     }
 
-    public String getWorkStatus() {
-        return workStatus;
-    }
-
-    public String getWorkSchedule() {
-        return workSchedule;
-    }
 }

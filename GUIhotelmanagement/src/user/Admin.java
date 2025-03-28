@@ -94,12 +94,9 @@ public class Admin extends User {
             stmt.setString(4, employee.getEmail());
             stmt.setString(5, employee.getPassword());
             stmt.setString(6, employee.getRole());
-            stmt.setDouble(7, employee.getSalary());
-            stmt.setString(8, employee.getAddress());
+            stmt.setDouble(7, employee.getSalary());  
             stmt.setString(9, employee.getDateOfBirth());
             stmt.setString(10, employee.getHireDate());
-            stmt.setString(11, employee.getWorkStatus());
-            stmt.setString(12, employee.getWorkSchedule());
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error adding employee: " + e.getMessage());
