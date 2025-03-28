@@ -123,6 +123,7 @@ public class EmployeeLogin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }
 
     

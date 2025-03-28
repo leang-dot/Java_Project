@@ -230,7 +230,7 @@ public class CrudRoom extends javax.swing.JPanel {
         String price = txtPrice.getText().trim();
         String availability = txtAvailability.getText().trim();
 
-        // Validation
+        
         if (roomType.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Room Type is required");
             return;
@@ -245,10 +245,6 @@ public class CrudRoom extends javax.swing.JPanel {
         }
         if (!price.matches("\\d+(\\.\\d+)?")) {
             JOptionPane.showMessageDialog(this, "Price must be a valid number");
-            return;
-        }
-        if (!availability.matches("(?i)^(yes|no)$")) {
-            JOptionPane.showMessageDialog(this, "Availability must be 'Yes' or 'No'");
             return;
         }
 
@@ -309,10 +305,6 @@ public class CrudRoom extends javax.swing.JPanel {
         }
         if (!price.matches("\\d+(\\.\\d+)?")) {
             JOptionPane.showMessageDialog(this, "Price must be a valid number");
-            return;
-        }
-        if (!availability.matches("(?i)^(yes|no)$")) {
-            JOptionPane.showMessageDialog(this, "Availability must be 'Yes' or 'No'");
             return;
         }
 
