@@ -81,7 +81,7 @@ public class SignUp extends javax.swing.JFrame {
         Password2.setForeground(new java.awt.Color(102, 102, 102));
         Password2.setText("Password");
 
-        txtPassword.setEditable(false);
+        txtPassword.setEditable(true);
         txtPassword.setBackground(new java.awt.Color(255, 255, 255));
         txtPassword.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(0, 0, 0));
