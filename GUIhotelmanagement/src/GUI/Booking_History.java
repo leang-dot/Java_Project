@@ -24,7 +24,7 @@ public class Booking_History extends javax.swing.JPanel {
         try (Connection conn = DatabaseConnection.getConnection()) {
             // Modified query to filter by customer_id
             String query = "SELECT booking_date, room_type, total_price " +
-                          "FROM bookings " +
+                          "FROM booking " +
                           "WHERE customer_id = ? " +
                           "ORDER BY booking_date ASC";
             PreparedStatement pstmt = conn.prepareStatement(query);
