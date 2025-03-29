@@ -8,7 +8,7 @@ public class Customer extends javax.swing.JFrame {
         String firstname, lastname, email;
         int customerId;
 
-        public Customer(String firstname, String lastname, int customerId, String email) { // Constructor for login
+        public Customer(String firstname, String lastname, int customerId, String email) { 
                 initComponents();
                 jLabel1.setText("<html>Welcome! <br>" + lastname + " " + firstname + "</html>");
                 txtSearch.setText("");
